@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Routes,Route} from 'react-router-dom';
-import User from '../component/UserComponent'
+// import User from '../component/UserComponent'
 import Login from '../loginsignup/login/Login';
 import CreateCustomer from '../loginsignup/signup/customer';
 import Accounts from '../component/Accounts';
 import AccountDetail from '../component/AccountDetail'
+import Transactions from '../component/Transactions'
+import TransactionDetail from '../component/TransactionDetail'
 
 import {AppBar, Container, Toolbar, Typography} from '@mui/material'
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
@@ -38,12 +40,15 @@ class MainRoutes extends Component {
                     </Container>
                 </AppBar>
                 <Routes path='/'>
-                <Route path='user' element={<User/>}/>
+                <Route path='user' element={<Accounts/>}/>
                 <Route path='login' element={<Login/>}/>
                 <Route path='customer-new' element={<CreateCustomer/>}/>
-                <Route path='/accounts/:id' element={<AccountDetail/>}/>
-                <Route path='/accounts' element= {<Accounts/>}/>
-                <Route path='*' element= {<User/>}/>
+                <Route path='accounts/:accountId' element={<AccountDetail/>}/>
+                <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
+                <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
+                <Route path='accounts' element= {<Accounts/>}/>
+               
+                <Route path='*' element= {<Login/>}/>
                 </Routes>
             </div>
         );

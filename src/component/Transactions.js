@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import {NavLink} from "react-router-dom";
+import React from 'react';
+import {NavLink, useParams} from "react-router-dom";
 
 import {Button,Grid,Box,IconButton,ListItemText, ListItem ,List ,Typography} from '@mui/material';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-class Accounts extends Component {
+const Transactions = ()=> {
+    
+    const { accountId } = useParams();
 
-
-    render() {
         return (
             <>
         <Grid container m={5} spacing={5}>
@@ -34,7 +34,7 @@ class Accounts extends Component {
                     m ={2}
                     sx={{ flexGrow: 1 }}
                     >
-                    Accounts
+                    Account {accountId} Transactions
             </Typography>
             <Grid container style={{display:'flex',justifyContent:'center'}}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -61,7 +61,6 @@ class Accounts extends Component {
         </Box>
         </>
         );
-    }
 }
 
-export default Accounts;
+export default Transactions

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { useParams, NavLink } from 'react-router-dom';
 
 import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
 
 
-class AccountDetail extends Component {
+const AccountDetail = () => {
     
-
-    render() {
-
+        let { accountId } = useParams();
         return (
         <>
             <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
@@ -18,7 +17,7 @@ class AccountDetail extends Component {
                         m ={2}
                         sx={{ flexGrow: 1 }}
                         >
-                        Account Detail
+                        Account {accountId} Detail
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ maxWidth: 650 }} aria-label="simple table">
@@ -57,9 +56,11 @@ class AccountDetail extends Component {
                     </Button>                   
                 </Grid>
                 <Grid item xs={2}>
+                    <NavLink to="transactions">
                     <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
                         View Transaction
                     </Button>   
+                    </NavLink>
                 </Grid>
                 <Grid item xs={2}>
                 <TextField
@@ -91,7 +92,6 @@ class AccountDetail extends Component {
             </Box>
         </>
         );
-    }
 }
 
 export default AccountDetail;
