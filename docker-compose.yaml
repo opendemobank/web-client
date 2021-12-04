@@ -1,0 +1,8 @@
+services:
+  frontend:
+    container_name: frontend
+    build: .
+    restart: always
+    ports:
+      - 80:3000
+
