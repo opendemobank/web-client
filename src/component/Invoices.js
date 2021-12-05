@@ -1,25 +1,39 @@
-import React from 'react';
-import {NavLink, useParams} from "react-router-dom";
+import React, { Component } from 'react';
+import {NavLink, Link} from "react-router-dom";
 
 import {Button,Grid,Box,IconButton,ListItemText, ListItem ,List ,Typography} from '@mui/material';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const Transactions = ()=> {
-    
-    const { accountId } = useParams();
+class Invoices extends Component {
 
+
+    render() {
         return (
             <>
         <Grid container m={5} spacing={5}>
             <Grid style={{alignItems:"right"}} item>
+                <Link to="/customer-new">
                 <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                     Create New Account
                 </Button>
+                </Link>
             </Grid>
             <Grid style={{alignItems:"right"}} item>
                 <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                      Account
+                </Button>
+            </Grid>
+
+            <Grid style={{alignItems:"right"}} item>
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                     Make A New Transfer
+                </Button>
+            </Grid>
+
+            <Grid style={{alignItems:"right"}} item>
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                     Invoices
                 </Button>
             </Grid>
 
@@ -34,7 +48,7 @@ const Transactions = ()=> {
                     m ={2}
                     sx={{ flexGrow: 1 }}
                     >
-                    Account {accountId} Transactions
+                    Invoices
             </Typography>
             <Grid container style={{display:'flex',justifyContent:'center'}}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -52,7 +66,7 @@ const Transactions = ()=> {
                             </NavLink>
                         }
                         >
-                        <ListItemText primary={`Transaction  ${value}`} />
+                        <ListItemText primary={`Invoice  ${value}`} />
                         </ListItem>
                 ))}
                 </List>
@@ -61,6 +75,7 @@ const Transactions = ()=> {
         </Box>
         </>
         );
+    }
 }
 
-export default Transactions
+export default Invoices;

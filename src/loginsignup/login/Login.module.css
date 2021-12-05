@@ -49,6 +49,10 @@
   letter-spacing: 0em;
   color: #fff;
 }
+.error{
+  text-align: center;
+  color: red;
+}
 
 .signinbtn {
   height: 35px;

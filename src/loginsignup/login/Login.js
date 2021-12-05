@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState }  from "react";
+import axios from "axios";
 // import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -9,7 +10,8 @@ import moneyimg from "../assets/moneyplant.jpg";
 
 const Login = () => {
   // const history = useHistory();
-
+  const [loginStatus, serLoginStatus] = useState("");
+  // let LoginStatus = "";
   const {
     value: enteredEmail,
     hasError: emailError,
@@ -33,12 +35,16 @@ const Login = () => {
     passwordBlurHandler();
 
     if (emailIsValid && passwordIsValid) {
-      console.log("Logging IN");
-      // history.push('/');
-      return;
+      axios.post(`http://50.17.212.123:8080/api/users/login?email=${enteredEmail}&password=${enteredPassword}`)
+      .then((data)=>{
+          serLoginStatus("")
+          localStorage.setItem('accessToken', data.data)
+          window.location.assign('/accounts')
+      })
+      .catch(()=>{
+        serLoginStatus("Invalid Email or Password")
+      })
     }
-
-    console.log("Something went wrong");
   };
 
 
@@ -55,6 +61,7 @@ const Login = () => {
       <div className={cssClasses.right}>
         <div className={cssClasses.content}>
           <h4 className={cssClasses.logo} >Banking App</h4>
+          <p className={cssClasses.error}>{loginStatus}</p>
           <form
             onSubmit={formSubmitHandler}
             className={cssClasses.form}
@@ -76,7 +83,8 @@ const Login = () => {
             <TextField
               className={cssClasses.input}
               id="outlined-basic"
-              label="Pasword"
+              label="Password"
+              type="password"
               variant="outlined"
               style={{ margin: "40px 0 0 0" }}
               value={enteredPassword}

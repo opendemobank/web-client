@@ -1,7 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 
-import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
+import {TableRow,Paper,Button,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
 
 const TransactionDetail = () => {
     const { accountId, transactionId } = useParams();
@@ -48,9 +48,11 @@ const TransactionDetail = () => {
                         </Button>                   
                     </Grid>
                     <Grid item xs={2}>
+                        <NavLink to="edit">
                         <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
                             Modify Transaction
-                        </Button>   
+                        </Button>
+                        </NavLink>   
                     </Grid>
                 </Grid>
             </Box>

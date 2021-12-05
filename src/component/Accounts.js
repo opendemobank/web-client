@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 
 import {Button,Grid,Box,IconButton,ListItemText, ListItem ,List ,Typography} from '@mui/material';
 
@@ -13,14 +13,32 @@ class Accounts extends Component {
             <>
         <Grid container m={5} spacing={5}>
             <Grid style={{alignItems:"right"}} item>
+                <Link to="/customer-new">
                 <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                     Create New Account
                 </Button>
+                </Link>
             </Grid>
             <Grid style={{alignItems:"right"}} item>
                 <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                      Account
                 </Button>
+            </Grid>
+
+            <Grid style={{alignItems:"right"}} item>
+                <Link to="/transfer">
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                     Make A New Transfer
+                </Button>
+                </Link>
+            </Grid>
+
+            <Grid style={{alignItems:"right"}} item>
+                <Link to="/invoices">
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                     Invoices
+                </Button>
+                </Link>
             </Grid>
 
            
