@@ -94,11 +94,9 @@ const Login = () => {
               helperText={emailErrorMsg}
             />
             
-            <p className={cssClasses.forgot}>Forgot Password?</p>
-            <button className={cssClasses.signinbtn}>Sign In</button>
+            <button className={cssClasses.signinbtn}>Login In</button>
             <NavLink to="/signup" style={{ textDecoration: "none" }}>
               <p className={cssClasses.change}>
-                New User? <span className={cssClasses.bold}> Sign Up</span>
               </p>
             </NavLink>
           </form>
