@@ -50,7 +50,7 @@ const Customer = () => {
     inputBlurHandler: accountNumberBlurHandler,
   } = useInput((val) => val.length > 10);
 
-
+  let accountBalance = 0; 
 
   // Form submitting Handler
   const submitFormHandler = (e) => {
@@ -94,7 +94,7 @@ const Customer = () => {
   }
 
   if (nameError) {
-    nameErrorMsg = "Please enter a name to represent you";
+    nameErrorMsg = "Enter a customer name";
   }
 
   if (passwordHasError) {
@@ -116,7 +116,7 @@ const Customer = () => {
       </div>
       <div className={cssClasses.right}>
         <div className={cssClasses.content}>
-          <h4 className={cssClasses.logo}>Banking App</h4>
+          <h2>Create A New Account</h2>
           <form
             onSubmit={submitFormHandler}
             className={cssClasses.form}
@@ -191,6 +191,15 @@ const Customer = () => {
               error={accountNumberHasError}
               helperText={accountNumberErrorMsg}
               required
+            />
+            <TextField
+              name="accountBalance"
+              className={cssClasses.input}
+              label="Initial Account Balance"
+              type="number"
+              variant="outlined"
+              style={{ margin: "7px 0 0 0" }}
+              value={accountBalance}
             />
 
             <button className={cssClasses.signinbtn}>Sign Up</button>

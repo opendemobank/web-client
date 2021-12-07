@@ -15,22 +15,14 @@
   width: 100%;
 }
 
-.right {
-  width: 50%;
+.content{
   display: grid;
   place-items: center;
 }
 
-.logo {
-  font-size: 34px;
-  text-align: center;
-  font-family: 'Outfit', sans-serif;
-}
-
-
 .form {
   width: 300px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .input {
