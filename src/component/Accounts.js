@@ -24,9 +24,7 @@ const Accounts = ()=> {
         })
         .catch((error)=>{
             setAccounts([]);
-            // console.log(error == 'Error: Request failed with status code 401' )
             checkUnauthorisedAccess(error);
-
         })
     }, []);
 

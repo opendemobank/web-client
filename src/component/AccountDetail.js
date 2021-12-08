@@ -1,22 +1,87 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import { useParams, NavLink } from 'react-router-dom';
+import useInput from "./hooks/use-input";
+import {getToken , checkUnauthorisedAccess } from "./_manageToken";
+
 
 import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
 
 
 const AccountDetail = () => {
+    const [accountDetail , setAccountDetail] = useState({});
+    let { accountId } = useParams();
+
+    useEffect(() => {
+        axios.get(`http://50.17.212.123:8080/api/accounts/${accountId}`,{
+            headers :{
+                'Content-Type' : 'application/json',
+                'Authorization': getToken()
+            }
+
+        })
+        .then((data)=>{
+            console.log(data);
+            setAccountDetail(data.data)
+        })
+        .catch((error)=>{
+            setAccountDetail({});
+            checkUnauthorisedAccess(error);
+        })
+    }, []);
+
+
+
+    const {
+        value: amountToAdd,
+        valueChangedHandler: addBalanceChangeHandler,
+      } = useInput((val) => val);
     
-    const [amountToAdd , setAmountToAdd] = useState(0)
-    const [amountToWithdraw , setAmountToWithdraw] = useState(0)
-        let { accountId } = useParams();
+      const {
+        value: amountToWithdraw,
+        valueChangedHandler: withdrawBalanceChangeHandler,
+      } = useInput((val) => val);
         
-        function addMoneyToAccount(){
-            console.log(amountToAdd , amountToWithdraw )
+    function addMoneyToAccount(){
+        if( amountToAdd > 0){
+            let updatedBalance = accountDetail.balance + amountToAdd;
+            updateBalance(updatedBalance);
+        }else{
+            window.alert("Amount to add should be more than 0 !!");
         }
+    }
+
+    function withDrawMoneyFromAccount(){
+        if( amountToWithdraw > 0 && ( amountToWithdraw <= accountDetail.balance )){
+            let updatedBalance = accountDetail.balance - amountToWithdraw ;
+            updateBalance(updatedBalance);
+        }else{
+            window.alert("Amount to withdraw should be more than 0 !!");
+        }
+    }
+
+    function updateBalance(updatedBalance){
+
+        axios.put(`http://50.17.212.123:8080/api/accounts/${accountId}`, {
+            balance: updatedBalance
+        },{
+            headers :{
+                'Content-Type' : 'application/json',
+                'Authorization': getToken()
+            }        
+        })
+        .then((data)=>{
+            setAccountDetail(data.data)
+        })
+        .catch((error)=>{
+            setAccountDetail({});
+            checkUnauthorisedAccess(error);
+        })
+    }
 
 
 
-        return (
+    return (
         <>
             <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
                 <Typography
@@ -26,19 +91,28 @@ const AccountDetail = () => {
                         m ={2}
                         sx={{ flexGrow: 1 }}
                         >
-                        Account {accountId} Detail
+                        Details
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ maxWidth: 650 }} aria-label="simple table">
                         <TableBody>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account number:</TableCell>
-                                <TableCell align="right">{"123445"}</TableCell>
+                                <TableCell align="right">{accountDetail.iban}</TableCell>
+                            </TableRow>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="">Account Type:</TableCell>
+                                <TableCell align="right">{accountDetail.accountType}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account balance:</TableCell>
-                                <TableCell align="right">{100}</TableCell>
+                                <TableCell align="right">{accountDetail.balance}</TableCell>
                             </TableRow>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="">Account Opening Date:</TableCell>
+                                <TableCell align="right">{Date(accountDetail.openDate) }</TableCell>
+                            </TableRow>
+                            <p>Dummy Data Below</p>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Name:</TableCell>
                                 <TableCell align="right">{"Rajan" }</TableCell>
@@ -79,6 +153,7 @@ const AccountDetail = () => {
                     variant="outlined"
                     value={amountToAdd}
                     style={{ height:'10px' }}
+                    onChange={addBalanceChangeHandler}
                 />
                 </Grid>
                 <Grid item xs={2}>
@@ -92,11 +167,12 @@ const AccountDetail = () => {
                     id="outlined-basic"
                     label="Amount"
                     variant="outlined"
-                    value= {amountToAdd}
+                    value= {amountToWithdraw}
+                    onChange={withdrawBalanceChangeHandler}
                 />
                 </Grid>
                 <Grid item xs={2}>
-                    <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
+                    <Button variant="contained" onClick={withDrawMoneyFromAccount}  component="button" sx={{flexGlow: 1}}>
                         Make A Withdraw
                     </Button>   
                 </Grid>
@@ -104,7 +180,7 @@ const AccountDetail = () => {
 
             </Box>
         </>
-        );
+    );
 }
 
 export default AccountDetail;
