@@ -38,7 +38,8 @@ const Login = () => {
       axios.post(`http://50.17.212.123:8080/api/users/login?email=${enteredEmail}&password=${enteredPassword}`)
       .then((data)=>{
           serLoginStatus("")
-          localStorage.setItem('accessToken', data.data)
+          localStorage.setItem('accessToken', data.data.token)
+          localStorage.setItem('user', data.data.user);
           window.location.assign('/accounts')
       })
       .catch(()=>{
