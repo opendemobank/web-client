@@ -35,10 +35,15 @@ const Login = () => {
     if (emailIsValid && passwordIsValid) {
       axios.post(`http://50.17.212.123:8080/api/users/login?email=${enteredEmail}&password=${enteredPassword}`)
       .then((data)=>{
+          console.log(data)
           serLoginStatus("")
           localStorage.setItem('accessToken', data.data.token)
           localStorage.setItem('user', data.data.user);
-          window.location.assign('/accounts')
+          if(data.data.user.role === "ADMIN"){
+            window.location.assign('/accounts')
+          }else{
+            window.location.assign('/invoices')
+          }
       })
       .catch(()=>{
         serLoginStatus("Invalid Email or Password")

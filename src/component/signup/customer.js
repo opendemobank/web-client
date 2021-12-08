@@ -1,8 +1,11 @@
 import React from "react";
-// import { useHistory } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-import TextField from "@mui/material/TextField";
+
+
+import {getToken , checkUnauthorisedAccess} from "../_manageToken";
+
+import {TextField,InputLabel,Select, MenuItem} from "@mui/material";
 import cssClasses from "./customer.module.css";
 import useInput from "../hooks/use-input";
 import moneyimg from "../assets/moneyplant.jpg";
@@ -50,7 +53,29 @@ const Customer = () => {
     inputBlurHandler: accountNumberBlurHandler,
   } = useInput((val) => val.length > 10);
 
-  let accountBalance = 0; 
+
+  const {
+    value: balance,
+    // hasError: balanceHasError,
+    // isValid: balanceIsValid,
+    valueChangedHandler: balanceChangeHandler,
+    inputBlurHandler: balanceBlurHandler,
+  } = useInput((val) => val);
+
+
+  const {
+    value: accountType,
+    hasError: accountTypeHasError,
+    valueChangedHandler: accountTypeChangeHandler,
+    inputBlurHandler: accountTypeBlurHandler,
+  } = useInput((val) => val);
+
+  const {
+    value: userType,
+    hasError: userTypeHasError,
+    valueChangedHandler: userTypeChangeHandler,
+    inputBlurHandler: userTypeBlurHandler,
+  } = useInput((val) => val);
 
   // Form submitting Handler
   const submitFormHandler = (e) => {
@@ -62,6 +87,8 @@ const Customer = () => {
     passwordBlurHandler();
     phoneNumberBlurHandler();
     accountNumberBlurHandler();
+    accountTypeBlurHandler();
+    userTypeBlurHandler();
     
     // Checking for input validity
     if (
@@ -69,9 +96,38 @@ const Customer = () => {
       emailIsValid &&
       passwordIsValid &&
       phoneNumberIsValid &&
-      accountNumberIsValid
+      accountNumberIsValid 
     ) {
-      console.log("Invalid");
+        let account = {
+          accountType : accountType,
+          openDate : new Date(),
+          balance : balance || 0,
+          iban : accountNumber
+        }      
+        let customer = {
+          email : email,
+          password : password,
+          fullName : name,
+          phoneNumber : phoneNumber,
+          role : userType,
+          accounts : [account]
+        }
+
+        console.log(customer);
+
+        axios.post(`http://50.17.212.123:8080/api/customers`, customer ,{
+          headers :{
+              'Content-Type' : 'application/json',
+              'Authorization': getToken()
+          }        
+      })
+      .then((data)=>{
+          window.location.assign('/accounts');
+      })
+      .catch((error)=>{
+          checkUnauthorisedAccess(error);
+      })
+
 
       return;
     } else {
@@ -193,21 +249,48 @@ const Customer = () => {
               required
             />
             <TextField
-              name="accountBalance"
+              name="balance"
               className={cssClasses.input}
               label="Initial Account Balance"
               type="number"
               variant="outlined"
               style={{ margin: "7px 0 0 0" }}
-              value={accountBalance}
-            />
+              value={balance}
+              onChange={balanceChangeHandler}
+              onBlur={balanceBlurHandler}
+              required
+            />            
+            <InputLabel id="demo-simple-select-label">Account Type</InputLabel>
+              <Select
+                style={{ margin: "7px 0 0 0" }}
+                className={cssClasses.input}
+                value={accountType}
+                label="Account Type"
+                variant="outlined"
+                onChange={accountTypeChangeHandler}
+                onBlur={accountTypeBlurHandler}
+                error={accountTypeHasError}
+              >
+                <MenuItem value={'PRIMARY'}>Primary</MenuItem>
+                <MenuItem value={'SECONDARY'}>Secondary</MenuItem>
+              </Select>
 
-            <button className={cssClasses.signinbtn}>Sign Up</button>
-            <NavLink to="/login" style={{ textDecoration: "none" }}>
-              <p className={cssClasses.change}>
-              Already have an account? <span className={cssClasses.bold}> Login</span>
-              </p>
-            </NavLink>
+              <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+              <Select
+                style={{ margin: "7px 0 0 0" }}
+                className={cssClasses.input}
+                value={userType}
+                variant="outlined"
+                label="User Type"
+                onChange={userTypeChangeHandler}
+                onBlur={userTypeBlurHandler}
+                error={userTypeHasError}
+              >
+                <MenuItem value={'ADMIN'}>Admin</MenuItem>
+                <MenuItem value={'USER'}>Customer</MenuItem>
+              </Select>
+
+            <button className={cssClasses.signinbtn}>Create</button>
           </form>
         </div>
       </div>
