@@ -1,7 +1,5 @@
 import React, { useState }  from "react";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
 import cssClasses from './Login.module.css';
@@ -96,10 +94,6 @@ const Login = () => {
             />
             
             <button className={cssClasses.signinbtn}>Login In</button>
-            <NavLink to="/signup" style={{ textDecoration: "none" }}>
-              <p className={cssClasses.change}>
-              </p>
-            </NavLink>
           </form>
         </div>
       </div>

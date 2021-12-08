@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Routes,Route, Navigate} from 'react-router-dom';
 // import User from '../component/UserComponent'
-import Login from '../loginsignup/login/Login';
-import CreateCustomer from '../loginsignup/signup/customer';
+import Login from '../component/login/Login';
+import CreateCustomer from '../component/signup/customer';
 import Accounts from '../component/Accounts';
 import AccountDetail from '../component/AccountDetail'
 import Transactions from '../component/Transactions'
