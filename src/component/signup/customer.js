@@ -45,13 +45,13 @@ const Customer = () => {
     inputBlurHandler: phoneNumberBlurHandler,
   } = useInput((val) => val.length > 6);
 
-  const {
-    value: accountNumber,
-    hasError: accountNumberHasError,
-    isValid: accountNumberIsValid,
-    valueChangedHandler: accountNumberChangeHandler,
-    inputBlurHandler: accountNumberBlurHandler,
-  } = useInput((val) => val.length > 10);
+  // const {
+  //   value: accountNumber,
+  //   hasError: accountNumberHasError,
+  //   isValid: accountNumberIsValid,
+  //   valueChangedHandler: accountNumberChangeHandler,
+  //   inputBlurHandler: accountNumberBlurHandler,
+  // } = useInput((val) => val.length > 10);
 
 
   const {
@@ -86,7 +86,7 @@ const Customer = () => {
     emailBlurHandler();
     passwordBlurHandler();
     phoneNumberBlurHandler();
-    accountNumberBlurHandler();
+    // accountNumberBlurHandler();
     accountTypeBlurHandler();
     userTypeBlurHandler();
     
@@ -95,14 +95,13 @@ const Customer = () => {
       nameIsValid &&
       emailIsValid &&
       passwordIsValid &&
-      phoneNumberIsValid &&
-      accountNumberIsValid 
+      phoneNumberIsValid 
+      // accountNumberIsValid 
     ) {
         let account = {
           accountType : accountType,
           openDate : new Date(),
           balance : balance || 0,
-          iban : accountNumber
         }      
         let customer = {
           email : email,
@@ -141,7 +140,7 @@ const Customer = () => {
   let emailErrorMsg = "";
   let nameErrorMsg = "";
   let passwordErrorMsg = "";
-  let accountNumberErrorMsg = "";
+  // let accountNumberErrorMsg = "";
   let phoneNumberErrorMsg = "";
 
 
@@ -157,9 +156,9 @@ const Customer = () => {
     passwordErrorMsg = "Password has to be at least 7 characters";
   }
 
-  if (accountNumberHasError) {
-    accountNumberErrorMsg = "Account Number has to be at least 10 characters";
-  }
+  // if (accountNumberHasError) {
+  //   accountNumberErrorMsg = "Account Number has to be at least 10 characters";
+  // }
   
   if (phoneNumberHasError) {
     phoneNumberErrorMsg = "Phone Number has to be at least 7 characters";
@@ -181,7 +180,6 @@ const Customer = () => {
           >
             <TextField
               className={cssClasses.input}
-              id="outlined-basic"
               label="Name"
               variant="outlined"
               style={{ margin: "20px 0 0 0" }}
@@ -194,7 +192,6 @@ const Customer = () => {
             />
             <TextField
               className={cssClasses.input}
-              id="outlined-basic"
               label="Email"
               variant="outlined"
               style={{ margin: "7px 0 0 0" }}
@@ -203,6 +200,7 @@ const Customer = () => {
               onBlur={emailBlurHandler}
               error={emailError}
               helperText={emailErrorMsg}
+              required
             />
             <TextField
               name="password"
@@ -234,7 +232,7 @@ const Customer = () => {
               required
             />
 
-            <TextField
+            {/* <TextField
               name="accountNumber"
               className={cssClasses.input}
               label="Primary Account Number"
@@ -247,7 +245,7 @@ const Customer = () => {
               error={accountNumberHasError}
               helperText={accountNumberErrorMsg}
               required
-            />
+            /> */}
             <TextField
               name="balance"
               className={cssClasses.input}
@@ -270,6 +268,7 @@ const Customer = () => {
                 onChange={accountTypeChangeHandler}
                 onBlur={accountTypeBlurHandler}
                 error={accountTypeHasError}
+                required
               >
                 <MenuItem value={'PRIMARY'}>Primary</MenuItem>
                 <MenuItem value={'SECONDARY'}>Secondary</MenuItem>
@@ -285,6 +284,7 @@ const Customer = () => {
                 onChange={userTypeChangeHandler}
                 onBlur={userTypeBlurHandler}
                 error={userTypeHasError}
+                required
               >
                 <MenuItem value={'ADMIN'}>Admin</MenuItem>
                 <MenuItem value={'USER'}>Customer</MenuItem>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Routes,Route, Navigate} from 'react-router-dom';
+import {Routes,Route, Navigate, NavLink} from 'react-router-dom';
 // import User from '../component/UserComponent'
 import Login from '../component/login/Login';
 import CreateCustomer from '../component/signup/customer';
@@ -11,9 +11,11 @@ import TransactionEdit from '../component/TransactionEdit'
 import Transfer from '../component/Transfer';
 import Invoices from '../component/Invoices';
 import InvoiceDetail from '../component/InvoiceDetail';
+import RequestMoney from '../component/RequestMoney';
 
 import {AppBar, Container, Toolbar, Typography,Button} from '@mui/material'
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 
 
 const MainRoutes = ()=> {
@@ -50,11 +52,15 @@ const MainRoutes = ()=> {
                     >
                     Open Demo Bank
                     </Typography>
+                    <NavLink to="/requestMoney">
+                        <QrCodeIcon sx={{ fontSize: 64}} style={{ margin: "0 30px 0 0", color: "black"  }}/>
+                    </NavLink>
                     <Button color="inherit" onClick={logout} >Logout</Button>
                 </Toolbar>
                 </Container>
             </AppBar>
             <Routes path='/'>
+            <Route path="requestMoney" element={<RequestMoney/>}/>
             <Route path='user' element={<Accounts/>}/>
             <Route path='customer-new' element={<CreateCustomer/>}/>
             <Route path='transfer' element={<Transfer/>} />
