@@ -163,11 +163,17 @@ const AccountDetail = () => {
                         >
                             <Box sx={style}>
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    Text in a modal
+                                    Are you  sure?
                                 </Typography>
                                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                                    By clicking yes, you will delete the account.
                                 </Typography>
+                                <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={closeAccount} >
+                                    Yes
+                                </Button>
+                                <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleClose} >
+                                    No
+                                </Button> 
                             </Box>
                         </Modal>     
                     </div>            
