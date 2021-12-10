@@ -104,6 +104,10 @@ const AccountDetail = () => {
                                 <TableCell align="right">{accountDetail.balance}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="">Currency:</TableCell>
+                                <TableCell align="right">{accountDetail.currency}</TableCell>
+                            </TableRow>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Name:</TableCell>
                                 <TableCell align="right">{"Full name"}</TableCell>
                             </TableRow>
