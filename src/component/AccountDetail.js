@@ -3,13 +3,16 @@ import axios from 'axios';
 import { useParams, NavLink } from 'react-router-dom';
 import useInput from "./hooks/use-input";
 import {getToken , checkUnauthorisedAccess } from "./_manageToken";
+import '../App.css';
 
 
 import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
 
 
 const AccountDetail = () => {
+
     const [accountDetail , setAccountDetail] = useState({});
+    const [customers, setCustomers] = useState({});
     let { accountId } = useParams();
 
     useEffect(() => {
@@ -18,7 +21,6 @@ const AccountDetail = () => {
                 'Content-Type' : 'application/json',
                 'Authorization': getToken()
             }
-
         })
         .then((data)=>{
             console.log(data);
@@ -29,7 +31,6 @@ const AccountDetail = () => {
             checkUnauthorisedAccess(error);
         })
     }, []);
-
 
 
     const {
@@ -79,8 +80,6 @@ const AccountDetail = () => {
         })
     }
 
-
-
     return (
         <>
             <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
@@ -101,21 +100,12 @@ const AccountDetail = () => {
                                 <TableCell align="right">{accountDetail.iban}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account Type:</TableCell>
-                                <TableCell align="right">{accountDetail.accountType}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account balance:</TableCell>
                                 <TableCell align="right">{accountDetail.balance}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account Opening Date:</TableCell>
-                                <TableCell align="right">{Date(accountDetail.openDate) }</TableCell>
-                            </TableRow>
-                            <p>Dummy Data Below</p>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Name:</TableCell>
-                                <TableCell align="right">{"Rajan" }</TableCell>
+                                <TableCell align="right">{"Full name"}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">DoB:</TableCell>
@@ -129,6 +119,14 @@ const AccountDetail = () => {
                                 <TableCell align="">Password:</TableCell>
                                 <TableCell align="right">{"1234434"}</TableCell>
                             </TableRow>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="">Account Type:</TableCell>
+                                <TableCell align="right">{accountDetail.accountType}</TableCell>
+                            </TableRow> 
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="">Account Opening Date:</TableCell>
+                                <TableCell align="right">{Date(accountDetail.openDate) }</TableCell>
+                            </TableRow>                        
                         </TableBody>
                     </Table>
                 </TableContainer>
