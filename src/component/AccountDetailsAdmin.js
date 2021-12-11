@@ -112,7 +112,7 @@ const AccountDetailsAdmin = () => {
 
     return (
         <>
-            <Box component="div" m={5} sx={{ alignContent:'center' }} >
+            <Box component="div" m={5} sx={{height:"400px", alignContent:'center' }} >
                 <Typography
                         variant="h3"
                         noWrap
@@ -142,22 +142,6 @@ const AccountDetailsAdmin = () => {
                                 <TableCell align="right">{accountDetail.currency}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Name:</TableCell>
-                                <TableCell align="right">{"Full name"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">DoB:</TableCell>
-                                <TableCell align="right">{"12/12/2021"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Email:</TableCell>
-                                <TableCell align="right">{"rajanraj@ut.ee"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Password:</TableCell>
-                                <TableCell align="right">{"1234434"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account Type:</TableCell>
                                 <TableCell align="right">{accountDetail.accountType}</TableCell>
                             </TableRow> 
@@ -169,7 +153,7 @@ const AccountDetailsAdmin = () => {
                     </Table>
                 </TableContainer>
                 <Grid container m={5}>
-                <Grid item xs={2}>
+                <Grid my={1} item xs={6} md={2}>
                 <div>
                         <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleOpen} >
                             Close Account
@@ -181,30 +165,39 @@ const AccountDetailsAdmin = () => {
                             aria-describedby="modal-modal-description"
                         >
                             <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    Are you  sure?
-                                </Typography>
-                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                    By clicking yes, you will delete the account.
-                                </Typography>
-                                <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={closeAccount} >
-                                    Yes
-                                </Button>
-                                <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleClose} >
-                                    No
-                                </Button> 
+                                <Grid container spacing={2} direction="row" justifyContent="center" gap={2}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        Are you  sure?
+                                    </Typography>
+                                    <Typography id="modal-modal-description">
+                                        By clicking yes, you will delete the account.
+                                    </Typography>
+                                
+                                <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center" >
+                                    <Grid item>
+                                    <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={closeAccount} >
+                                        Yes
+                                    </Button>
+                                    </Grid>
+                                    <Grid item>
+                                    <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleClose} >
+                                        No
+                                    </Button> 
+                                    </Grid>
+                                </Grid>
+                                </Grid>
                             </Box>
                         </Modal>     
                     </div>                    
                 </Grid>
-                <Grid item xs={2}>
+                <Grid my={1} item xs={6} md={2}>
                     <NavLink to="transactions">
                     <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
                         View Transaction
                     </Button>   
                     </NavLink>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid my={1} item xs={6} md={2}>
                 <TextField
                     type="number"
                     id="outlined-basic"
@@ -215,12 +208,12 @@ const AccountDetailsAdmin = () => {
                     onChange={addBalanceChangeHandler}
                 />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid my={1} item xs={6} md={2}>
                     <Button variant="contained" onClick={addMoneyToAccount}  component="button" sx={{flexGlow: 1}}>
                     Add Money
                     </Button>   
                 </Grid>
-                <Grid item xs={2}>
+                <Grid my={1} item xs={6} md={2}>
                 <TextField
                     type="number"
                     id="outlined-basic"
@@ -230,9 +223,9 @@ const AccountDetailsAdmin = () => {
                     onChange={withdrawBalanceChangeHandler}
                 />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid my={1} item xs={6} md={2}>
                     <Button variant="contained" onClick={withDrawMoneyFromAccount}  component="button" sx={{flexGlow: 1}}>
-                        Make A Withdraw
+                        Withdraw
                     </Button>   
                 </Grid>
                 </Grid>
