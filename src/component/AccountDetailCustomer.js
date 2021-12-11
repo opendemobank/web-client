@@ -9,7 +9,7 @@ import '../App.css';
 import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
 
 
-const AccountDetail = () => {
+const AccountDetailCustomer = () => {
 
     const [accountDetail , setAccountDetail] = useState({});
     const [customers, setCustomers] = useState({});
@@ -185,4 +185,4 @@ const AccountDetail = () => {
     );
 }
 
-export default AccountDetail;
+export default AccountDetailCustomer;
