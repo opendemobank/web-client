@@ -10,8 +10,8 @@ const TransactionEdit = () => {
     const {accountId, transactionId, setTransactionDetails} = useParams();
 
     const {
-        value: name,
-        valueChangedHandler: nameChangeHandler,
+        value: time,
+        valueChangedHandler: timeChangeHandler,
     } = useInput((val) => val);
 
     const {
@@ -20,13 +20,13 @@ const TransactionEdit = () => {
     } = useInput((val) => val);
 
     function onModifyClicked(){
-        updateTransaction(name, amount)
+        updateTransaction(time, amount)
     }
 
-    function updateTransaction(name, number, amount){
+    function updateTransaction(time, amount){
 
         axios.put(`http://50.17.212.123:8080/api/accounts/${transactionId}`, {
-            name: name,
+            time: time,
             amount: amount
         },{
             headers :{
@@ -62,16 +62,16 @@ const TransactionEdit = () => {
                 >
                     <TextField
                         id="outlined-basic"
-                        label="Account Name"
+                        label="New timestamp"
                         variant="outlined"
                         required
-                        onChange={nameChangeHandler}
+                        onChange={timeChangeHandler}
 
                     /><br/>
 
                     <TextField
                         name="password"
-                        label="Amount to Withdraw"
+                        label="New amount"
                         variant="outlined"
                         required
                         onChange={amountChangeHandler}

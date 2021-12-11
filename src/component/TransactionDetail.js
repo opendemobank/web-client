@@ -1,23 +1,30 @@
-import React from 'react';
-import {useParams, NavLink} from 'react-router-dom';
-
-import {
-    TableRow,
-    Paper,
-    Button,
-    Grid,
-    TableContainer,
-    TableCell,
-    TableBody,
-    Table,
-    Box,
-    Typography
-} from '@mui/material';
-import axios from "axios";
-import {checkUnauthorisedAccess, getToken} from "./_manageToken";
+import React, { useState, useEffect } from 'react';
+import { useParams, NavLink } from 'react-router-dom';
+import {getToken, checkUnauthorisedAccess } from "./_manageToken";
+import {TableRow,Paper,Button,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
+import axios from 'axios';
 
 const TransactionDetail = () => {
-    const {accountId, transactionId} = useParams();
+    const [ TransactionDetail, setTransactionDetail] = useState([]);
+    const { accountId, transactionId } = useParams();
+
+    useEffect(() => {
+        axios.get(`http://50.17.212.123:8080/api/transactions/${transactionId}`,{
+            headers :{
+                'Content-Type' : 'application/json',
+                'Authorization': getToken()
+            }
+
+        })
+        .then((data)=>{
+          //console.log(data);
+          setTransactionDetail(data.data);
+        })
+        .catch((error)=>{
+            setTransactionDetail([]);
+            checkUnauthorisedAccess(error);
+        })
+    }, []);
 
     function callBackTransaction(){
 
@@ -39,35 +46,36 @@ const TransactionDetail = () => {
 
     return (
         <>
-            <Box component="div" m={5} sx={{border: '1px solid  grey', height: "400px", alignContent: 'center'}}>
+            <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
                 <Typography
-                    variant="h3"
-                    noWrap
-                    component="div"
-                    m={2}
-                    sx={{flexGrow: 1}}
-                >
-                    Account {accountId}
-                    Transaction {transactionId}
+                        variant="h3"
+                        noWrap
+                        component="div"
+                        m ={2}
+                        sx={{ flexGrow: 1 }}
+                        >
+                        Account {accountId}
+                        <br />
+                        Transaction {transactionId}
                 </Typography>
                 <TableContainer component={Paper}>
-                    <Table sx={{maxWidth: 650}} aria-label="simple table">
+                    <Table sx={{ maxWidth: 650 }} aria-label="simple table">
                         <TableBody>
-                            <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Transaction Type:</TableCell>
                                 <TableCell align="right">{"Withdrawal"}</TableCell>
                             </TableRow>
-                            <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account Name:</TableCell>
-                                <TableCell align="right">{"Rajan"}</TableCell>
+                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.receiversFullName : ""}</TableCell>
                             </TableRow>
-                            <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account Number:</TableCell>
-                                <TableCell align="right">{"2"}</TableCell>
+                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.accountIBAN : ""}</TableCell>
                             </TableRow>
-                            <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Amount Withdrawal:</TableCell>
-                                <TableCell align="right">{"100"}</TableCell>
+                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.amount : ""}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
