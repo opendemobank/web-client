@@ -71,6 +71,7 @@ const MainRoutes = ()=> {
             <Route path='accounts/details/:accountId' element={<AccountDetailsAdmin/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
+            <Route path='accounts/details/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
             <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
             <Route path='accounts/details/:accountId/transactions' element= {<Transactions/>}/>
             <Route path='accounts' element= {<Accounts/>}/>
