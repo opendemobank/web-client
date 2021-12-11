@@ -27,7 +27,7 @@ const AccountDetailsAdmin = () => {
         })
         .then((data)=>{
             console.log(data);
-            setAccountDetail(data.data)
+            setAccountDetail(data.data);
         })
         .catch((error)=>{
             setAccountDetail({});
@@ -85,13 +85,15 @@ const AccountDetailsAdmin = () => {
     function closeAccount(){
         axios.delete(`http://50.17.212.123:8080/api/accounts/${accountId}`,
             {
-                headers:{
+                headers :{
+                    'Content-Type' : 'application/json',
                     'Authorization': getToken()
                 },
             }
         ).then(()=>{
             console.log("Account deleted")
             handleClose();
+            window.location.reload();
         })
         .catch((error)=>{
             checkUnauthorisedAccess(error);
@@ -140,7 +142,7 @@ const AccountDetailsAdmin = () => {
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Currency:</TableCell>
-                                <TableCell align="right">{accountDetail.currency}</TableCell>
+                                <TableCell align="right">{accountDetail?.currency?.name}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account Type:</TableCell>
