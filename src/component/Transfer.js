@@ -1,68 +1,61 @@
-import React, {useEffect} from 'react';
+import React from "react";
 import axios from 'axios';
-
-import {  useLocation } from 'react-router-dom';
 import cssClasses from "./signup/customer.module.css";
 import useInput from "./hooks/use-input";
-import {Button,TextField,Box,Typography} from '@mui/material';
+import {Button,TextField,Box,Typography, MenuItem, RadioGroup, FormControlLabel, Radio, FormLabel} from '@mui/material';
 
 import {getToken , checkUnauthorisedAccess } from './_manageToken';
 
 
-
-//Custom function to get query Params
-function useQuery() {
-  const { search } = useLocation();
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
-
 const Transfer = () => {
   
-  let user = useQuery().get('user')  ;
-  useEffect(()=>{
-    
-    if(user){
-      axios.get(`http://50.17.212.123:8080/api/customers/${user}`,{
-        headers :{
-            'Content-Type' : 'application/json',
-            'Authorization': getToken()
-        }        
-      })
-      .then((data)=>{
-        console.log(data)
-            setFullName(data.data.fullName);
-            let accounts = data.data.accounts;
-            let account = accounts.filter(({accountType})=> accountType === "PRIMARY")
-            if( account.length > 0 ){
-              setAccountNumber(account[0].iban);
-
-            } 
-
-      })
-      .catch((error)=>{
-          checkUnauthorisedAccess(error);
-      })
+  const user = JSON.parse(localStorage.getItem("user"));
+  let accountsIBANs = [];
+  if ((user !== null) && (user.accounts !== null)) {
+    accountsIBANs = user.accounts.map(a => a.iban);
   }
+  
+  const [receiverStatus, setReceiverStatus] = React.useState(1);
 
-  })
+  let radioHandler = (receiverStatus) => {
+    setReceiverStatus(receiverStatus)
+  };
+
+  const senderAccountMenuItems = accountsIBANs.map(ai =>
+    <MenuItem value={ai}>{ai}</MenuItem>
+  );
 
   const {
-    value: name,
-    hasError: nameError,
-    isValid: nameIsValid,
-    valueChangedHandler: nameChangedHandler,
-    inputBlurHandler: nameBlurHandler,
-    setInput : setFullName
-  } = useInput((val) => val.trim() !== "");
+    value: sendersAccountNumber,
+    hasError: sendersAccountNumberError,
+    isValid: sendersAccountNumberIsValid,
+    valueChangedHandler: sendersAccountNumberChangedHandler,
+    inputBlurHandler: sendersAccountNumberBlurHandler,
+  } = useInput((val) => val !== '');
 
   const {
-    value: accountNumber,
-    hasError: accountNumberError,
-    isValid: accountNumberIsValid,
-    valueChangedHandler: accountNumberChangeHandler,
-    inputBlurHandler: accountNumberBlurHandler,
-    setInput: setAccountNumber
-  } = useInput((val) => val.length > 10);
+    value: receiverAccountNumber,
+    hasError: receiverAccountNumberError,
+    isValid: receiverAccountNumberIsValid,
+    valueChangedHandler: receiverAccountNumberChangeHandler,
+    inputBlurHandler: receiverAccountNumberBlurHandler,
+  } = useInput((val) => val.length > 0);
+
+  const {
+    value: receiverEmail,
+    hasError: receiverEmailError,
+    isValid: receiverEmailIsValid,
+    valueChangedHandler: receiverEmailChangeHandler,
+    inputBlurHandler: receiverEmailBlurHandler,
+  } = useInput((val) => val.length > 0);
+
+  const {
+    value: receiverPhone,
+    hasError: receiverPhoneError,
+    isValid: receiverPhoneIsValid,
+    valueChangedHandler: receiverPhoneChangeHandler,
+    inputBlurHandler: receiverPhoneBlurHandler,
+  } = useInput((val) => val.length > 0);
 
   const {
     value: amount,
@@ -70,7 +63,7 @@ const Transfer = () => {
     isValid: amountIsValid,
     valueChangedHandler: amountChangeHandler,
     inputBlurHandler: amountBlurHandler,
-  } = useInput((val) => val.length > 6);
+  } = useInput((val) => val.length > 0);
 
 
   const {
@@ -79,52 +72,136 @@ const Transfer = () => {
     isValid: descriptionIsValid,
     valueChangedHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
-  } = useInput((val) => val.length > 6);
+  } = useInput((val) => val.length <= 30);
 
   const submitFormHandler = (e) => {
     e.preventDefault();
 
     // Making every state touched
-    nameBlurHandler();
-    accountNumberBlurHandler();
+    sendersAccountNumberBlurHandler();
+    receiverAccountNumberBlurHandler();
+    receiverEmailBlurHandler();
     amountBlurHandler();
     descriptionBlurHandler();
     
     // Checking for input validity
     if (
-      nameIsValid &&
-      accountNumberIsValid &&
+      sendersAccountNumberIsValid && (
+      receiverAccountNumberIsValid ||
+      receiverPhoneIsValid ||
+      receiverEmailIsValid) &&
       amountIsValid &&
       descriptionIsValid 
     ) {
- 
+      
+      let transfer = {
+        description : description,
+        senderIBAN : sendersAccountNumber,
+        recieverPhoneNumber : receiverPhone,
+        recieverEmail : receiverEmail,
+        recieverIBAN : receiverAccountNumber,
+        amount : parseInt(amount)
+      }
+
+      console.log(transfer);
       // Transfer API TO trigger
-    //   axios.post(`http://50.17.212.123:8080/api/customer`, customer ,{
-    //       headers :{
-    //           'Content-Type' : 'application/json',
-    //           'Authorization': getToken()
-    //       }        
-    //   })
-    //   .then((data)=>{
-    //       window.location.assign('/accounts');
-    //   })
-    //   .catch((error)=>{
-    //       checkUnauthorisedAccess(error);
-    //   })
+      axios.post(`http://50.17.212.123:8080/api/transfers`, transfer, {
+          headers :{
+              'Content-Type' : 'application/json',
+              'Authorization': getToken()
+          }        
+      })
+      .then((data)=>{
+          alert("Money has been transferred")
+          window.location.assign('/invoices');
+      })
+      .catch((error)=>{
+          alert("Oops! Something went wrong")
+          checkUnauthorisedAccess(error);
+      })
 
-
-    //   return;
-    // } else {
-    //   console.log("Invalid Inputs");
+      return;
+    } else {
+      console.log("Invalid Inputs");
     
-    // }
-
-  }
+    }
   };
 
+  let sendersAccountNumberErrorMsg = "";
+  let receiverAccountNumberErrorMsg = "";
+  let receiverEmailErrorMsg = "";
+  let receiverPhoneErrorMsg = "";
+  let amountErrorMsg = "";
+  let descriptionErrorMsg = "";
+
+  if (sendersAccountNumberError) {
+    sendersAccountNumberErrorMsg = "Please, fill this field";
+  }
+  if (receiverAccountNumberError) {
+    receiverAccountNumberErrorMsg = "Please, fill this field";
+  }
+
+  if (receiverEmailError) {
+    receiverEmailErrorMsg = "Please, fill this field";
+  }
+
+  if (receiverPhoneError) {
+    receiverPhoneErrorMsg = "Please, fill this field";
+  }
+
+  if (amountHasError) {
+    amountErrorMsg = "Please, fill this field";
+  }
+
+  if (descriptionHasError) {
+    descriptionErrorMsg = "Description should be shorter than 30 symbols"
+  }
 
 
+  const receiverAccountNumberTextField = 
+    <TextField
+      className={cssClasses.input}
+      id="outlined-basic"
+      label="Recipient Account"
+      variant="outlined"
+      style={{ margin: "7px 0 0 0" }}
+      value={receiverAccountNumber}
+      onChange={receiverAccountNumberChangeHandler}
+      onBlur={receiverAccountNumberBlurHandler}
+      error={receiverAccountNumberError}
+      helperText={receiverAccountNumberErrorMsg}
+      required
+    />;
 
+  const receiverEmailTextField = 
+    <TextField
+      className={cssClasses.input}
+      id="outlined-basic"
+      label="Recipient Email"
+      variant="outlined"
+      style={{ margin: "7px 0 0 0" }}
+      value={receiverEmail}
+      onChange={receiverEmailChangeHandler}
+      onBlur={receiverEmailBlurHandler}
+      error={receiverEmailError}
+      helperText={receiverEmailErrorMsg}
+      required
+    />;
+
+  const receiverPhoneTextField = 
+    <TextField
+      className={cssClasses.input}
+      id="outlined-basic"
+      label="Recipient Phone"
+      variant="outlined"
+      style={{ margin: "7px 0 0 0" }}
+      value={receiverPhone}
+      onChange={receiverPhoneChangeHandler}
+      onBlur={receiverPhoneBlurHandler}
+      error={receiverPhoneError}
+      helperText={receiverPhoneErrorMsg}
+      required
+    />;
     return (
     <center>
         <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
@@ -143,30 +220,35 @@ const Transfer = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField
+          <TextField 
             className={cssClasses.input}
             id="outlined-basic"
-            label="Recipient Name"
+            label="Sender Account"
             variant="outlined"
             style={{ margin: "20px 0 0 0" }}
-            value={name}
-            onChange={nameChangedHandler}
-            onBlur={nameBlurHandler}
-            error={nameError}
+            value={sendersAccountNumber}
+            select
+            onChange={sendersAccountNumberChangedHandler}
+            onBlur={sendersAccountNumberBlurHandler}
+            error={sendersAccountNumberError}
+            helperText={sendersAccountNumberErrorMsg}
             required
-          />
-          <TextField
-            className={cssClasses.input}
-            id="outlined-basic"
-            label="Recipient Account"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={accountNumber}
-            onChange={accountNumberChangeHandler}
-            onBlur={accountNumberBlurHandler}
-            error={accountNumberError}
-            required
-          />
+          >
+            {senderAccountMenuItems}
+          </TextField >
+          <FormLabel component="legend">Recipient Information</FormLabel>
+          <RadioGroup
+              aria-label="gender"
+              defaultValue="iban"
+              name="radio-buttons-group"
+          >
+            <FormControlLabel value="iban" control={<Radio onChange={(e) => radioHandler(1)}/>} label="IBAN" />
+            <FormControlLabel value="email" control={<Radio onChange={(e) => radioHandler(2)}/>} label="Email" />
+            <FormControlLabel value="phone" control={<Radio onChange={(e) => radioHandler(3)}/>} label="Phone" />
+          </RadioGroup>
+          {receiverStatus === 1 && receiverAccountNumberTextField}
+          {receiverStatus === 2 && receiverEmailTextField}
+          {receiverStatus === 3 && receiverPhoneTextField}
           <TextField
             name="amount"
             className={cssClasses.input}
@@ -178,6 +260,7 @@ const Transfer = () => {
             onChange={amountChangeHandler}
             onBlur={amountBlurHandler}
             error={amountHasError}
+            helperText={amountErrorMsg}
             required
           />
 
@@ -192,10 +275,11 @@ const Transfer = () => {
             onChange={descriptionChangeHandler}
             onBlur={descriptionBlurHandler}
             error={descriptionHasError}
+            helperText={descriptionErrorMsg}
           />
-        <Button variant="contained" style={{ margin: "7px 0 0 0" }}  component="button" sx={{flexGlow: 1}}>
-                        Transfer
-        </Button>   
+          <Button variant="contained" type="submit" active="true" style={{ margin: "7px 0 0 0" }}  component="button" sx={{flexGlow: 1}}>
+            Transfer
+          </Button>
       </form>
         </Box>
     </center>
