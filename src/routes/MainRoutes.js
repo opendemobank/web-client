@@ -72,6 +72,7 @@ const MainRoutes = ()=> {
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
             <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
+            <Route path='accounts/details/:accountId/transactions' element= {<Transactions/>}/>
             <Route path='accounts' element= {<Accounts/>}/>
             <Route path='*' element= {<Navigate to="/accounts"/>}/>
             </Routes>

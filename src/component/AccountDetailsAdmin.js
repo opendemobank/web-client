@@ -96,6 +96,10 @@ const AccountDetailsAdmin = () => {
                     <Table sx={{ maxWidth: 650 }} aria-label="simple table">
                         <TableBody>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell align="">Account id:</TableCell>
+                                <TableCell align="right">{accountDetail.id}</TableCell>
+                            </TableRow>
+                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account number:</TableCell>
                                 <TableCell align="right">{accountDetail.iban}</TableCell>
                             </TableRow>
@@ -129,7 +133,7 @@ const AccountDetailsAdmin = () => {
                             </TableRow> 
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account Opening Date:</TableCell>
-                                <TableCell align="right">{Date(accountDetail.openDate) }</TableCell>
+                                <TableCell align="right">{Date(accountDetail.openDate)}</TableCell>
                             </TableRow>                        
                         </TableBody>
                     </Table>
