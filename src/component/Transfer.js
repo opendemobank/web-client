@@ -1,13 +1,27 @@
-import React from "react";
+import React, {useEffect} from "react";
 import axios from 'axios';
+
+import { useLocation } from 'react-router-dom';
 import cssClasses from "./signup/customer.module.css";
 import useInput from "./hooks/use-input";
 import {Button,TextField,Box,Typography, MenuItem, RadioGroup, FormControlLabel, Radio, FormLabel} from '@mui/material';
 
 import {getToken , checkUnauthorisedAccess } from './_manageToken';
 
+function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 const Transfer = () => {
+
+  useEffect(()=>{
+    if(account && amt){
+      console.log(account)
+      setAccountNumber(account)
+      setAmount(amt)
+    }
+  },[])
   
   const user = JSON.parse(localStorage.getItem("user"));
   let accountsIBANs = [];
@@ -39,8 +53,12 @@ const Transfer = () => {
     isValid: receiverAccountNumberIsValid,
     valueChangedHandler: receiverAccountNumberChangeHandler,
     inputBlurHandler: receiverAccountNumberBlurHandler,
+    setInput: setAccountNumber
   } = useInput((val) => val.length > 0);
 
+  let account = useQuery().get('accountNumber');
+  let amt = useQuery().get('amount');
+  
   const {
     value: receiverEmail,
     hasError: receiverEmailError,
@@ -63,8 +81,8 @@ const Transfer = () => {
     isValid: amountIsValid,
     valueChangedHandler: amountChangeHandler,
     inputBlurHandler: amountBlurHandler,
-  } = useInput((val) => val.length > 0);
-
+    setInput: setAmount
+  } = useInput((val) => val.length > 6);
 
   const {
     value: description,
@@ -212,7 +230,7 @@ const Transfer = () => {
                     m ={2}
                     sx={{ flexGrow: 1 }}
             >
-                    Money Transfer
+                    Transfer
             </Typography>
         <form
           onSubmit={submitFormHandler}
