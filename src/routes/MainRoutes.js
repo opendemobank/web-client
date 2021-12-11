@@ -6,6 +6,8 @@ import CreateCustomer from '../component/signup/customer';
 import Accounts from '../component/Accounts';
 import AccountDetail from '../component/AccountDetail'
 import Transactions from '../component/Transactions'
+import TransactionAll from '../component/TransactionAll'
+import TransactionNew from '../component/TransactionNew'
 import TransactionDetail from '../component/TransactionDetail'
 import TransactionEdit from '../component/TransactionEdit'
 import Transfer from '../component/Transfer';
@@ -66,6 +68,8 @@ const MainRoutes = ()=> {
             <Route path='transfer' element={<Transfer/>} />
             <Route path='invoices/:invoiceId' element={<InvoiceDetail/>}/>
             <Route path='invoices' element={<Invoices/>}/>
+            <Route path='transactions' element={<TransactionAll/>}/>
+            <Route path='transactions/new' element={<TransactionNew/>}/>
             <Route path='accounts/:accountId' element={<AccountDetail/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>

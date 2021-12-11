@@ -62,6 +62,14 @@ const Accounts = ()=> {
             </Link>
         </Grid>
 
+        <Grid style={{alignItems:"right"}} item>
+            <Link to="/transactions">
+            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                    All Transactions
+            </Button>
+            </Link>
+        </Grid>
+
         
     </Grid>
     <hr/>
