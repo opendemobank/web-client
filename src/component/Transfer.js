@@ -135,7 +135,7 @@ const Transfer = () => {
                     m ={2}
                     sx={{ flexGrow: 1 }}
             >
-                    Money Transfer
+                    Transfer
             </Typography>
         <form
           onSubmit={submitFormHandler}
