@@ -113,6 +113,7 @@ const AccountDetailsAdmin = () => {
     return (
         <>
             <Box component="div" m={5} sx={{height:"400px", alignContent:'center' }} >
+            <center>
                 <Typography
                         variant="h3"
                         noWrap
@@ -152,6 +153,7 @@ const AccountDetailsAdmin = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                </center>
                 <Grid container m={5}>
                 <Grid my={1} item xs={6} md={2}>
                 <div>
