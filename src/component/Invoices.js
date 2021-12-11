@@ -20,7 +20,7 @@ class Invoices extends Component {
                 </Link>
             </Grid>
             <Grid style={{alignItems:"right"}} item>
-                <Link to="/user">
+                <Link to="/account">
                 <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                      Account
                 </Button>

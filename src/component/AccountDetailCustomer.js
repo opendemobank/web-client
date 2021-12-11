@@ -10,7 +10,6 @@ import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,
 
 
 const AccountDetailCustomer = () => {
-
     const [accountDetail , setAccountDetail] = useState({});
     const [customers, setCustomers] = useState({});
     let { accountId } = useParams();
@@ -83,6 +82,7 @@ const AccountDetailCustomer = () => {
     return (
         <>
             <Box component="div" m={5} sx={{alignContent:'center'}} >
+            <center>
                 <Typography
                         variant="h3"
                         noWrap
@@ -150,7 +150,7 @@ const AccountDetailCustomer = () => {
                     </Button>   
                 </Grid>
                 </Grid>
-
+                </center>
             </Box>
         </>
     );
