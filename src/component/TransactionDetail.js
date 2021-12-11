@@ -17,7 +17,7 @@ const TransactionDetail = () => {
 
         })
         .then((data)=>{
-          //console.log(data);
+          console.log(data);
           setTransactionDetail(data.data);
         })
         .catch((error)=>{
@@ -27,9 +27,8 @@ const TransactionDetail = () => {
     }, []);
 
     function callBackTransaction(){
-
-        axios.put(`http://50.17.212.123:8080/api/accounts/${transactionId}`, {
-
+        axios.post(`http://50.17.212.123:8080/api/transactions/storno`, {
+            id: TransactionDetail.transfer.id
         },{
             headers :{
                 'Content-Type' : 'application/json',
@@ -82,13 +81,13 @@ const TransactionDetail = () => {
                 </TableContainer>
                 <Grid container m={5}>
                     <Grid item xs={2}>
-                        <Button variant="contained" component="button" sx={{flexGlow: 1}}>
+                        <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={callBackTransaction}>
                             Call Back Transaction
                         </Button>
                     </Grid>
                     <Grid item xs={2}>
                         <NavLink to="edit">
-                            <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={callBackTransaction}>
+                            <Button variant="contained" component="button" sx={{flexGlow: 1}} >
                                 Modify Transaction
                             </Button>
                         </NavLink>
