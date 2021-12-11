@@ -5,6 +5,7 @@ import Login from '../component/login/Login';
 import CreateCustomer from '../component/signup/customer';
 import Accounts from '../component/Accounts';
 import AccountDetail from '../component/AccountDetail'
+import AccountDetailsAdmin from '../component/AccountDetailsAdmin'
 import Transactions from '../component/Transactions'
 import TransactionDetail from '../component/TransactionDetail'
 import TransactionEdit from '../component/TransactionEdit'
@@ -67,6 +68,7 @@ const MainRoutes = ()=> {
             <Route path='invoices/:invoiceId' element={<InvoiceDetail/>}/>
             <Route path='invoices' element={<Invoices/>}/>
             <Route path='accounts/:accountId' element={<AccountDetail/>}/>
+            <Route path='accounts/details/:accountId' element={<AccountDetailsAdmin/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
             <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>

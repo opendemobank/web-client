@@ -83,7 +83,7 @@ const Accounts = ()=> {
                     key={value.id}
                     disableGutters
                     secondaryAction={
-                        <NavLink to={`${value.id}`}>
+                        <NavLink to={`details/${value.id}`}>
                             <IconButton component="a"edge="end" aria-label="delete">
                             <ArrowForwardIosIcon />
                             </IconButton>

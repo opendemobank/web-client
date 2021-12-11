@@ -124,7 +124,7 @@ const AccountDetail = () => {
                                 </TableRow>
                                 <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                     <TableCell align="">Account Opening Date:</TableCell>
-                                    <TableCell align="right">{accountDetail.openDate }</TableCell>
+                                    <TableCell align="right">{accountDetail.openDate}</TableCell>
                                 </TableRow>
                                 {/* <p>Dummy Data Below</p>
                                 <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
