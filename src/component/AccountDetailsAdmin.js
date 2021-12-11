@@ -35,9 +35,6 @@ const AccountDetailsAdmin = () => {
         })
     }, []);
 
-
-
-
     const {
         value: amountToAdd,
         valueChangedHandler: addBalanceChangeHandler,
@@ -115,7 +112,7 @@ const AccountDetailsAdmin = () => {
 
     return (
         <>
-            <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
+            <Box component="div" m={5} sx={{ alignContent:'center' }} >
                 <Typography
                         variant="h3"
                         noWrap
