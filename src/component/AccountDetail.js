@@ -83,8 +83,20 @@ const AccountDetail = () => {
     }
 
     function closeAccount(){
-        axios.delete(`http://50.17.212.123:8080/api/accounts/${accountId}`).then(() => setAccountDetail());
-    }  
+        axios.delete(`http://50.17.212.123:8080/api/accounts/${accountId}`,
+            {
+                headers:{
+                    'Authorization': getToken()
+                },
+            }
+        ).then(()=>{
+            console.log("Account deleted")
+            handleClose();
+        })
+        .catch((error)=>{
+            checkUnauthorisedAccess(error);
+        })
+    }   
 
     const style = {
         position: 'absolute',
