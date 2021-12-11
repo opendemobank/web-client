@@ -4,6 +4,7 @@ import {Routes,Route, Navigate} from 'react-router-dom';
 import Login from '../component/login/Login';
 import CreateCustomer from '../component/signup/customer';
 import Accounts from '../component/Accounts';
+import CustomerAccounts from '../component/CustomerAccounts';
 import AccountDetailCustomer from '../component/AccountDetailCustomer'
 import Transactions from '../component/Transactions'
 import TransactionDetail from '../component/TransactionDetail'
@@ -56,12 +57,12 @@ const MainRoutes = ()=> {
                 </Container>
             </AppBar>
             <Routes path='/'>
-            <Route path='user' element={<Accounts/>}/>
+            <Route path='user' element={<CustomerAccounts/>}/>
             <Route path='customer-new' element={<CreateCustomer/>}/>
             <Route path='transfer' element={<Transfer/>} />
             <Route path='invoices/:invoiceId' element={<InvoiceDetail/>}/>
             <Route path='invoices' element={<Invoices/>}/>
-            <Route path='accounts/:accountId' element={<AccountDetailCustomer/>}/>
+            <Route path='user/accounts/:accountId' element={<AccountDetailCustomer/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
             <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
