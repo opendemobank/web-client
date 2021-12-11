@@ -105,7 +105,7 @@ const AccountDetailCustomer = () => {
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Currency:</TableCell>
-                                <TableCell align="right">{accountDetail.currency}</TableCell>
+                                <TableCell align="right">{accountDetail?.currency?.name}</TableCell>
                             </TableRow>         
                         </TableBody>
                     </Table>
