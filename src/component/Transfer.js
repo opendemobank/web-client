@@ -18,41 +18,24 @@ function useQuery() {
 
 const Transfer = () => {
   
-  let user = useQuery().get('user')  ;
+  let account = useQuery().get('accountNumber');
+  let amt = useQuery().get('amount');
+  
   useEffect(()=>{
-    
-    if(user){
-      axios.get(`http://50.17.212.123:8080/api/customers/${user}`,{
-        headers :{
-            'Content-Type' : 'application/json',
-            'Authorization': getToken()
-        }        
-      })
-      .then((data)=>{
-        console.log(data)
-            setFullName(data.data.fullName);
-            let accounts = data.data.accounts;
-            let account = accounts.filter(({accountType})=> accountType === "PRIMARY")
-            if( account.length > 0 ){
-              setAccountNumber(account[0].iban);
+    if(account && amt){
+      console.log(account)
+      setAccountNumber(account)
+      setAmount(amt)
+    }
+  },[])
 
-            } 
-
-      })
-      .catch((error)=>{
-          checkUnauthorisedAccess(error);
-      })
-  }
-
-  })
-
+  
   const {
     value: name,
     hasError: nameError,
     isValid: nameIsValid,
     valueChangedHandler: nameChangedHandler,
     inputBlurHandler: nameBlurHandler,
-    setInput : setFullName
   } = useInput((val) => val.trim() !== "");
 
   const {
@@ -70,8 +53,10 @@ const Transfer = () => {
     isValid: amountIsValid,
     valueChangedHandler: amountChangeHandler,
     inputBlurHandler: amountBlurHandler,
+    setInput: setAmount
   } = useInput((val) => val.length > 6);
 
+  
 
   const {
     value: description,
@@ -153,7 +138,6 @@ const Transfer = () => {
             onChange={nameChangedHandler}
             onBlur={nameBlurHandler}
             error={nameError}
-            required
           />
           <TextField
             className={cssClasses.input}
