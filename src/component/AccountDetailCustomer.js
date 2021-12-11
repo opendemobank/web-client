@@ -82,7 +82,7 @@ const AccountDetailCustomer = () => {
 
     return (
         <>
-            <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
+            <Box component="div" m={5} sx={{alignContent:'center'}} >
                 <Typography
                         variant="h3"
                         noWrap
@@ -106,40 +106,11 @@ const AccountDetailCustomer = () => {
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Currency:</TableCell>
                                 <TableCell align="right">{accountDetail.currency}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Name:</TableCell>
-                                <TableCell align="right">{"Full name"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">DoB:</TableCell>
-                                <TableCell align="right">{"12/12/2021"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Email:</TableCell>
-                                <TableCell align="right">{"rajanraj@ut.ee"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Password:</TableCell>
-                                <TableCell align="right">{"1234434"}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account Type:</TableCell>
-                                <TableCell align="right">{accountDetail.accountType}</TableCell>
-                            </TableRow> 
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account Opening Date:</TableCell>
-                                <TableCell align="right">{Date(accountDetail.openDate) }</TableCell>
-                            </TableRow>                        
+                            </TableRow>         
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <Grid container m={5}>
-                <Grid item xs={2}>
-                    <Button variant="contained" component="button" sx={{flexGlow: 1}}>
-                        Close Account
-                    </Button>                   
-                </Grid>
                 <Grid item xs={2}>
                     <NavLink to="transactions">
                     <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
