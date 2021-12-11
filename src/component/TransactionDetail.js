@@ -25,8 +25,26 @@ const TransactionDetail = () => {
             checkUnauthorisedAccess(error);
         })
     }, []);
-   
-        return (
+
+    function callBackTransaction(){
+
+        axios.put(`http://50.17.212.123:8080/api/accounts/${transactionId}`, {
+
+        },{
+            headers :{
+                'Content-Type' : 'application/json',
+                'Authorization': getToken()
+            }
+        })
+            .then((data)=>{
+                this.props.history.goBack()
+            })
+            .catch((error)=>{
+                checkUnauthorisedAccess(error);
+            })
+    }
+
+    return (
         <>
             <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
                 <Typography
@@ -66,19 +84,19 @@ const TransactionDetail = () => {
                     <Grid item xs={2}>
                         <Button variant="contained" component="button" sx={{flexGlow: 1}}>
                             Call Back Transaction
-                        </Button>                   
+                        </Button>
                     </Grid>
                     <Grid item xs={2}>
                         <NavLink to="edit">
-                        <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
-                            Modify Transaction
-                        </Button>
-                        </NavLink>   
+                            <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={callBackTransaction}>
+                                Modify Transaction
+                            </Button>
+                        </NavLink>
                     </Grid>
                 </Grid>
             </Box>
         </>
-        );
+    );
 }
 
 export default TransactionDetail;
