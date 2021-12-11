@@ -6,7 +6,7 @@ import {getToken , checkUnauthorisedAccess } from "./_manageToken";
 import '../App.css';
 
 
-import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
+import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography, Modal} from '@mui/material';
 
 
 const AccountDetailsAdmin = () => {
@@ -14,6 +14,9 @@ const AccountDetailsAdmin = () => {
     const [accountDetail , setAccountDetail] = useState({});
     const [customers, setCustomers] = useState({});
     let { accountId } = useParams();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         axios.get(`http://50.17.212.123:8080/api/accounts/${accountId}`,{
@@ -31,6 +34,8 @@ const AccountDetailsAdmin = () => {
             checkUnauthorisedAccess(error);
         })
     }, []);
+
+
 
 
     const {
@@ -79,6 +84,34 @@ const AccountDetailsAdmin = () => {
             checkUnauthorisedAccess(error);
         })
     }
+
+    function closeAccount(){
+        axios.delete(`http://50.17.212.123:8080/api/accounts/${accountId}`,
+            {
+                headers:{
+                    'Authorization': getToken()
+                },
+            }
+        ).then(()=>{
+            console.log("Account deleted")
+            handleClose();
+        })
+        .catch((error)=>{
+            checkUnauthorisedAccess(error);
+        })
+    } 
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
 
     return (
         <>
@@ -140,9 +173,32 @@ const AccountDetailsAdmin = () => {
                 </TableContainer>
                 <Grid container m={5}>
                 <Grid item xs={2}>
-                    <Button variant="contained" component="button" sx={{flexGlow: 1}}>
-                        Close Account
-                    </Button>                   
+                <div>
+                        <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleOpen} >
+                            Close Account
+                        </Button>  
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style}>
+                                <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    Are you  sure?
+                                </Typography>
+                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                    By clicking yes, you will delete the account.
+                                </Typography>
+                                <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={closeAccount} >
+                                    Yes
+                                </Button>
+                                <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleClose} >
+                                    No
+                                </Button> 
+                            </Box>
+                        </Modal>     
+                    </div>                    
                 </Grid>
                 <Grid item xs={2}>
                     <NavLink to="transactions">
