@@ -47,14 +47,6 @@ const Accounts = ()=> {
         </Grid>
 
         <Grid style={{alignItems:"right"}} item>
-            <Link to="/transfer">
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                    Make A New Transfer
-            </Button>
-            </Link>
-        </Grid>
-
-        <Grid style={{alignItems:"right"}} item>
             <Link to="/invoices">
             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                     Invoices

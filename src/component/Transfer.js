@@ -36,7 +36,7 @@ const Transfer = () => {
   };
 
   const senderAccountMenuItems = accountsIBANs.map(ai =>
-    <MenuItem value={ai}>{ai}</MenuItem>
+    <MenuItem value={ai} key={ai}>{ai}</MenuItem>
   );
 
   const {

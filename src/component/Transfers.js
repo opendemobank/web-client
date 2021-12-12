@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import {getToken, checkUnauthorisedAccess } from "./_manageToken";
-import {Button,Grid, Link, Table, TableCell, TableContainer, TableHead, TableBody, TableRow, Paper, Box} from '@mui/material';
+import {Typography, Table, TableCell, TableContainer, TableHead, TableBody, TableRow, Paper, Box} from '@mui/material';
 
 const Transfers = ()=> {
     const [transfers, setTransfers] = useState([]);
-    const user = JSON.parse(localStorage.getItem("user"));
+    
     useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
         axios.get(`http://50.17.212.123:8080/api/transfers/user/${user.id}`,{
             headers :{
                 'Content-Type' : 'application/json',
@@ -61,38 +62,18 @@ const Transfers = ()=> {
     
 
     return (
-        <>
-            <Grid container m={5} spacing={5}>
-                <Grid style={{alignItems:"right"}} item>
-                    <Link to="/customer-new">
-                    <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                        Create New Account
-                    </Button>
-                    </Link>
-                </Grid>
-                <Grid style={{alignItems:"right"}} item>
-                    <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            Account
-                    </Button>
-                </Grid>
-
-                <Grid style={{alignItems:"right"}} item>
-                    <Link to="/transfer">
-                        <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            Make A New Transfer
-                        </Button>
-                    </Link>
-                </Grid>
-
-                <Grid style={{alignItems:"right"}} item>
-                    <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            Invoices
-                    </Button>
-                </Grid>
-            </Grid>
-        <hr/>
+        <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
+            <Typography
+                    variant="h3"
+                    noWrap
+                    component="div"
+                    m ={2}
+                    sx={{ flexGrow: 1 }}
+            >
+                    Transfers
+            </Typography>
             {table}
-        </>
+        </Box> 
     );
 }
 
