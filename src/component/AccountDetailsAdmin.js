@@ -7,6 +7,7 @@ import '../App.css';
 
 
 import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography, Modal} from '@mui/material';
+import { FamilyRestroomRounded } from '@mui/icons-material';
 
 
 const AccountDetailsAdmin = () => {
@@ -17,6 +18,7 @@ const AccountDetailsAdmin = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [disable, setDisable] = React.useState(false);
 
     useEffect(() => {
         axios.get(`http://50.17.212.123:8080/api/accounts/${accountId}`,{
@@ -28,6 +30,7 @@ const AccountDetailsAdmin = () => {
         .then((data)=>{
             console.log(data);
             setAccountDetail(data.data);
+            disableButton();
         })
         .catch((error)=>{
             setAccountDetail({});
@@ -91,6 +94,7 @@ const AccountDetailsAdmin = () => {
                 },
             }
         ).then(()=>{
+            disableButton();
             console.log("Account deleted")
             handleClose();
             window.location.reload();
@@ -100,6 +104,14 @@ const AccountDetailsAdmin = () => {
         })
     } 
 
+    function disableButton(){
+        if (accountDetail.accountType == "INACTIVE"){
+           setDisable(true);
+        } else {
+           setDisable(false);
+        }
+    }
+  
     const style = {
         position: 'absolute',
         top: '50%',
@@ -159,7 +171,7 @@ const AccountDetailsAdmin = () => {
                 <Grid container m={5}>
                 <Grid my={1} item xs={6} md={2}>
                 <div>
-                        <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleOpen} >
+                        <Button id="close-acc" variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleOpen} disabled={disable}>
                             Close Account
                         </Button>  
                         <Modal
