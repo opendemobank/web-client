@@ -13,7 +13,6 @@ import { FamilyRestroomRounded } from '@mui/icons-material';
 const AccountDetailsAdmin = () => {
 
     const [accountDetail , setAccountDetail] = useState({});
-    const [customers, setCustomers] = useState({});
     let { accountId } = useParams();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -67,7 +66,6 @@ const AccountDetailsAdmin = () => {
     }
 
     function updateBalance(updatedBalance){
-
         axios.put(`http://50.17.212.123:8080/api/accounts/${accountId}`, {
             balance: updatedBalance
         },{
@@ -189,18 +187,18 @@ const AccountDetailsAdmin = () => {
                                         By clicking yes, you will delete the account.
                                     </Typography>
                                 
-                                <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center" >
-                                    <Grid item>
-                                    <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={closeAccount} >
-                                        Yes
-                                    </Button>
+                                    <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center" >
+                                        <Grid item>
+                                        <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={closeAccount} >
+                                            Yes
+                                        </Button>
+                                        </Grid>
+                                        <Grid item>
+                                        <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleClose} >
+                                            No
+                                        </Button> 
+                                        </Grid>
                                     </Grid>
-                                    <Grid item>
-                                    <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleClose} >
-                                        No
-                                    </Button> 
-                                    </Grid>
-                                </Grid>
                                 </Grid>
                             </Box>
                         </Modal>     
