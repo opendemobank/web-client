@@ -34,63 +34,6 @@ const AccountDetailCustomer = () => {
         })
     }
 
-    const {
-        value: amountToAdd,
-        valueChangedHandler: addBalanceChangeHandler,
-        resetInput: resetAddBalance
-      } = useInput((val) => val);
-    
-    const {
-        value: amountToWithdraw,
-        valueChangedHandler: withdrawBalanceChangeHandler,
-        resetInput: resetWithdrawBalance
-      } = useInput((val) => val);
-        
-    function addMoneyToAccount(){
-        if( amountToAdd > 0){
-            let updatedBalance = amountToAdd;
-            updateBalance(updatedBalance, "Deposit");
-        }else{
-            window.alert("Amount to add should be more than 0 !!");
-        }
-    }
-
-    function withDrawMoneyFromAccount(){
-        if( amountToWithdraw > 0 && ( amountToWithdraw <= accountDetail.balance )){
-            let updatedBalance = - amountToWithdraw ;
-            updateBalance(updatedBalance, "Withdraw");
-        }else{
-            window.alert("Amount to withdraw should be more than existing balance or 0 !!");
-        }
-    }
-
-    function updateBalance(updatedBalance, description){
-
-        axios.post(`http://50.17.212.123:8080/api/transactions`, {
-            amount: updatedBalance,
-            description : description,
-            endIban: accountDetail.iban,
-            originIban : null
-        },{
-            headers :{
-                'Content-Type' : 'application/json',
-                'Authorization': getToken()
-            }        
-        })
-        .then((data)=>{
-                if(description === 'Withdraw'){
-                    resetWithdrawBalance();
-                }else{
-                    resetAddBalance();
-                }
-                activate();
-        })
-        .catch((error)=>{
-            setAccountDetail({});
-            checkUnauthorisedAccess(error);
-        })
-    }
-
     return (
         <>
             <Box component="div" m={5} sx={{alignContent:'center'}} >
