@@ -41,9 +41,11 @@ class Invoices extends Component {
                 </Link>
             </Grid>
             <Grid style={{alignItems:"right"}} item>
+                <Link to="/user">
                 <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                      Account
                 </Button>
+                </Link>
             </Grid>
             {make_transfer}
             {view_transfers}

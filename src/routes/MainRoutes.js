@@ -4,7 +4,8 @@ import {Routes,Route, Navigate, NavLink} from 'react-router-dom';
 import Login from '../component/login/Login';
 import CreateCustomer from '../component/signup/customer';
 import Accounts from '../component/Accounts';
-import AccountDetail from '../component/AccountDetail'
+import CustomerAccounts from '../component/CustomerAccounts';
+import AccountDetailCustomer from '../component/AccountDetailCustomer'
 import Transactions from '../component/Transactions'
 import TransactionAll from '../component/TransactionAll'
 import TransactionNew from '../component/TransactionNew'
@@ -15,6 +16,7 @@ import Tranfers from '../component/Transfers';
 import Invoices from '../component/Invoices';
 import InvoiceDetail from '../component/InvoiceDetail';
 import RequestMoney from '../component/RequestMoney';
+
 
 import {AppBar, Container, Toolbar, Typography,Button} from '@mui/material'
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
@@ -64,7 +66,7 @@ const MainRoutes = ()=> {
             </AppBar>
             <Routes path='/'>
             <Route path="requestMoney" element={<RequestMoney/>}/>
-            <Route path='user' element={<Accounts/>}/>
+            <Route path='user' element={<CustomerAccounts/>}/>
             <Route path='customer-new' element={<CreateCustomer/>}/>
             <Route path='transfer' element={<Transfer/>} />
             <Route path='transfers' element={<Tranfers/>}/>
@@ -72,7 +74,7 @@ const MainRoutes = ()=> {
             <Route path='invoices' element={<Invoices/>}/>
             <Route path='transactions' element={<TransactionAll/>}/>
             <Route path='transactions/new' element={<TransactionNew/>}/>
-            <Route path='accounts/:accountId' element={<AccountDetail/>}/>
+            <Route path='user/accounts/:accountId' element={<AccountDetailCustomer/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
             <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
