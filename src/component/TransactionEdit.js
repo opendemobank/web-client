@@ -7,7 +7,7 @@ import {checkUnauthorisedAccess, getToken} from "./_manageToken";
 
 const TransactionEdit = () => {
     const [transaction, setTransaction] = useState([]);
-    const {transactionId} = useParams();
+    const {accountId, transactionId} = useParams();
     let [timeValue, onTimeValueChange] = useState(undefined);
     let [amount, onAmountChange] = useState(undefined);
     let [previousAmount, onPreviousAmountChange] = useState(undefined);
@@ -50,8 +50,10 @@ const TransactionEdit = () => {
             }
         })
             .then((data) => {
-                setTransaction(data.data)
-                this.props.history.goBack()
+                console.log("success")
+                console.log(accountId)
+                console.log(transactionId)
+                window.location.assign('/accounts/' + accountId + '/transactions/' + transactionId)
             })
             .catch((error) => {
                 checkUnauthorisedAccess(error);

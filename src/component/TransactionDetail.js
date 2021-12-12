@@ -36,7 +36,7 @@ const TransactionDetail = () => {
             }
         })
             .then((data)=>{
-                this.props.history.goBack()
+                window.location.assign('/accounts/')
             })
             .catch((error)=>{
                 checkUnauthorisedAccess(error);
@@ -55,42 +55,85 @@ const TransactionDetail = () => {
                         >
                         Transaction {transactionId}
                 </Typography>
-                <TableContainer component={Paper}>
-                    <Table sx={{ maxWidth: 650 }} aria-label="simple table">
-                        <TableBody>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Transaction Type:</TableCell>
-                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.description : ""}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account Name:</TableCell>
-                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.receiversFullName : ""}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account Number:</TableCell>
-                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.accountIBAN : ""}</TableCell>
-                            </TableRow>
-                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Amount Withdrawal:</TableCell>
-                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.amount : ""}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                {TransactionDetail.transfer != null ?
+                    <TableContainer component={Paper}>
+                        <Table sx={{maxWidth: 650}} aria-label="simple table">
+                            <TableBody>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Transaction Type:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.description : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Account Name:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.receiversFullName : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Account Number:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.accountIBAN : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Amount Withdrawal:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.amount : ""}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                : null}
+                {TransactionDetail.transactionStatus = "STRONO" ?
+                    <TableContainer component={Paper}>
+                        <Table sx={{maxWidth: 650}} aria-label="simple table">
+                            <TableBody>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Transaction description:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.description != null ? TransactionDetail.description : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Strono id:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.id != null ? TransactionDetail.id : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Amount:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.creditTransactionRecord != null ? TransactionDetail.creditTransactionRecord.amount : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Credit account ID:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.creditTransactionRecord != null ? TransactionDetail.creditTransactionRecord.id : ""}</TableCell>
+                                </TableRow>
+                                <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                    <TableCell align="">Debit account ID:</TableCell>
+                                    <TableCell
+                                        align="right">{TransactionDetail.debitTransactionRecord != null ? TransactionDetail.debitTransactionRecord.id : ""}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                : null}
+                {TransactionDetail.transactionStatus = "STRONO" ? null :
                 <Grid container m={5}>
-                    <Grid item xs={2}>
-                        <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={callBackTransaction}>
-                            Call Back Transaction
-                        </Button>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <NavLink to={`/edit/${transactionId}`}>
-                            <Button variant="contained" component="button" sx={{flexGlow: 1}}>
-                                Modify Transaction
+
+                        <Grid item xs={2}>
+                            <Button variant="contained" component="button" sx={{flexGlow: 1}}
+                                    onClick={callBackTransaction}>
+                                Call Back Transaction
                             </Button>
+                        </Grid>
+                        <Grid item xs={2}>
+                        <NavLink to={`/edit/${transactionId}`}>
+                        <Button variant="contained" component="button" sx={{flexGlow: 1}}>
+                        Modify Transaction
+                        </Button>
                         </NavLink>
-                    </Grid>
+                        </Grid>
                 </Grid>
+                }
             </Box>
         </>
     );
