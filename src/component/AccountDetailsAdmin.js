@@ -17,7 +17,6 @@ const AccountDetailsAdmin = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [disable, setDisable] = React.useState(false);
 
     useEffect(() => {
         axios.get(`http://50.17.212.123:8080/api/accounts/${accountId}`,{
@@ -29,9 +28,6 @@ const AccountDetailsAdmin = () => {
         .then((data)=>{
             console.log(data);
             setAccountDetail(data.data);
-            if (accountDetail.accountType == "INACTIVE"){
-                setDisable(true);
-            }
         })
         .catch((error)=>{
             setAccountDetail({});
@@ -86,22 +82,28 @@ const AccountDetailsAdmin = () => {
     }
 
     function closeAccount(){
-        axios.delete(`http://50.17.212.123:8080/api/accounts/${accountId}`,
-            {
-                headers :{
-                    'Content-Type' : 'application/json',
-                    'Authorization': getToken()
-                },
-            }
-        ).then((data)=>{
-            accountDetail.accountType = "INACTIVE";
-            setDisable(true);
-            console.log("Account deleted")
-            handleClose();
-        })
-        .catch((error)=>{
-            checkUnauthorisedAccess(error);
-        })
+        if (accountDetail.accountType ==="INACTIVE")
+        {
+            alert("Account is already inactive.")
+        }
+        else {
+            axios.delete(`http://50.17.212.123:8080/api/accounts/${accountId}`,
+                {
+                    headers :{
+                        'Content-Type' : 'application/json',
+                        'Authorization': getToken()
+                    },
+                }
+            ).then((data)=>{
+                accountDetail.accountType = "INACTIVE";
+                setDisable(disableButton());
+                console.log("Account deleted")
+                handleClose();
+            })
+            .catch((error)=>{
+                checkUnauthorisedAccess(error);
+            })
+        }
     }
   
     const style = {
@@ -163,7 +165,7 @@ const AccountDetailsAdmin = () => {
                 <Grid container m={5}>
                 <Grid my={1} item xs={6} md={2}>
                 <div>
-                        <Button id="close-acc" variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleOpen} disabled={disable}>
+                        <Button id="close-acc" variant="contained" component="button" sx={{flexGlow: 1}} >
                             Close Account
                         </Button>  
                         <Modal
