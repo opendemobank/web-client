@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const TransactionDetail = () => {
     const [ TransactionDetail, setTransactionDetail] = useState([]);
-    const { accountId, transactionId } = useParams();
+    const { transactionId } = useParams();
 
     useEffect(() => {
         axios.get(`http://50.17.212.123:8080/api/transactions/${transactionId}`,{
@@ -53,8 +53,6 @@ const TransactionDetail = () => {
                         m ={2}
                         sx={{ flexGrow: 1 }}
                         >
-                        Account {accountId}
-                        <br />
                         Transaction {transactionId}
                 </Typography>
                 <TableContainer component={Paper}>
@@ -62,7 +60,7 @@ const TransactionDetail = () => {
                         <TableBody>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Transaction Type:</TableCell>
-                                <TableCell align="right">{"Withdrawal"}</TableCell>
+                                <TableCell align="right">{TransactionDetail.transfer!=null ? TransactionDetail.transfer.description : ""}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell align="">Account Name:</TableCell>
@@ -86,8 +84,8 @@ const TransactionDetail = () => {
                         </Button>
                     </Grid>
                     <Grid item xs={2}>
-                        <NavLink to="edit">
-                            <Button variant="contained" component="button" sx={{flexGlow: 1}} >
+                        <NavLink to={`/edit/${transactionId}`}>
+                            <Button variant="contained" component="button" sx={{flexGlow: 1}}>
                                 Modify Transaction
                             </Button>
                         </NavLink>

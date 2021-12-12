@@ -41,19 +41,12 @@ const Accounts = ()=> {
             </Link>
         </Grid>
         <Grid style={{alignItems:"right"}} item>
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                    Account
-            </Button>
-        </Grid>
-
-        <Grid style={{alignItems:"right"}} item>
             <Link to="/invoices">
             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                     Invoices
             </Button>
             </Link>
         </Grid>
-
         <Grid style={{alignItems:"right"}} item>
             <Link to="/transactions">
             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
@@ -83,7 +76,7 @@ const Accounts = ()=> {
                     key={value.id}
                     disableGutters
                     secondaryAction={
-                        <NavLink to={`${value.id}`}>
+                        <NavLink to={`details/${value.id}`}>
                             <IconButton component="a"edge="end" aria-label="delete">
                             <ArrowForwardIosIcon />
                             </IconButton>

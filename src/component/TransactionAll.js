@@ -62,7 +62,7 @@ const TransactionAll = ()=> {
                         key={value.id}
                         disableGutters
                         secondaryAction={
-                            <Link to={`/accounts/${value.debitTransactionRecord!==null ? value.debitTransactionRecord.account.id : 0}/transactions/${value.id}`}>
+                            <Link to={`/accounts/transactions/${value.id}`}>
                                 <IconButton component="a"edge="end" aria-label="delete">
                                 <ArrowForwardIosIcon />
                                 </IconButton>

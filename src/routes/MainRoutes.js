@@ -6,6 +6,7 @@ import CreateCustomer from '../component/signup/customer';
 import Accounts from '../component/Accounts';
 import CustomerAccounts from '../component/CustomerAccounts';
 import AccountDetailCustomer from '../component/AccountDetailCustomer'
+import AccountDetailsAdmin from '../component/AccountDetailsAdmin'
 import Transactions from '../component/Transactions'
 import TransactionAll from '../component/TransactionAll'
 import TransactionNew from '../component/TransactionNew'
@@ -66,6 +67,7 @@ const MainRoutes = ()=> {
             </AppBar>
             <Routes path='/'>
             <Route path="requestMoney" element={<RequestMoney/>}/>
+            <Route path='edit/:transactionId' element={<TransactionEdit/>}/>
             <Route path='user' element={<CustomerAccounts/>}/>
             <Route path='customer-new' element={<CreateCustomer/>}/>
             <Route path='transfer' element={<Transfer/>} />
@@ -75,9 +77,12 @@ const MainRoutes = ()=> {
             <Route path='transactions' element={<TransactionAll/>}/>
             <Route path='transactions/new' element={<TransactionNew/>}/>
             <Route path='user/accounts/:accountId' element={<AccountDetailCustomer/>}/>
+            <Route path='accounts/details/:accountId' element={<AccountDetailsAdmin/>}/>
             <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
-            <Route path='accounts/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
+            <Route path='accounts/transactions/:transactionId' element={<TransactionDetail/>}/>
+            <Route path='accounts/details/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
             <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
+            <Route path='accounts/details/:accountId/transactions' element= {<Transactions/>}/>
             <Route path='accounts' element= {<Accounts/>}/>
             <Route path='*' element= {<Navigate to="/accounts"/>}/>
             </Routes>
