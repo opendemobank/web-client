@@ -83,7 +83,7 @@ const TransactionDetail = () => {
                         </Table>
                     </TableContainer>
                 : null}
-                {TransactionDetail.transactionStatus = "STRONO" ?
+                {TransactionDetail.transfer == null ?
                     <TableContainer component={Paper}>
                         <Table sx={{maxWidth: 650}} aria-label="simple table">
                             <TableBody>
@@ -116,7 +116,7 @@ const TransactionDetail = () => {
                         </Table>
                     </TableContainer>
                 : null}
-                {TransactionDetail.transactionStatus = "STRONO" ? null :
+                {TransactionDetail.transfer == null ? null :
                 <Grid container m={5}>
 
                         <Grid item xs={2}>
