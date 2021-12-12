@@ -94,7 +94,7 @@ const AccountDetailsAdmin = () => {
                 },
             }
         ).then((data)=>{
-          //  setAccountDetail(data.data) activate account
+            accountDetail.accountType = "INACTIVE";
             setDisable(true);
             console.log("Account deleted")
             handleClose();
