@@ -93,11 +93,11 @@ const AccountDetailsAdmin = () => {
                     'Authorization': getToken()
                 },
             }
-        ).then(()=>{
+        ).then((data)=>{
+          //  setAccountDetail(data.data) activate account
             setDisable(true);
             console.log("Account deleted")
             handleClose();
-            window.location.reload();
         })
         .catch((error)=>{
             checkUnauthorisedAccess(error);
@@ -178,7 +178,7 @@ const AccountDetailsAdmin = () => {
                                         Are you  sure?
                                     </Typography>
                                     <Typography id="modal-modal-description">
-                                        By clicking yes, you will delete the account.
+                                        By clicking yes, you will close the account.
                                     </Typography>
                                 
                                     <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center" >
