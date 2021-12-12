@@ -29,7 +29,9 @@ const AccountDetailsAdmin = () => {
         .then((data)=>{
             console.log(data);
             setAccountDetail(data.data);
-            disableButton();
+            if (accountDetail.accountType == "INACTIVE"){
+                setDisable(true);
+            }
         })
         .catch((error)=>{
             setAccountDetail({});
@@ -42,7 +44,7 @@ const AccountDetailsAdmin = () => {
         valueChangedHandler: addBalanceChangeHandler,
       } = useInput((val) => val);
     
-      const {
+    const {
         value: amountToWithdraw,
         valueChangedHandler: withdrawBalanceChangeHandler,
       } = useInput((val) => val);
@@ -92,7 +94,7 @@ const AccountDetailsAdmin = () => {
                 },
             }
         ).then(()=>{
-            disableButton();
+            setDisable(true);
             console.log("Account deleted")
             handleClose();
             window.location.reload();
@@ -100,14 +102,6 @@ const AccountDetailsAdmin = () => {
         .catch((error)=>{
             checkUnauthorisedAccess(error);
         })
-    } 
-
-    function disableButton(){
-        if (accountDetail.accountType == "INACTIVE"){
-           setDisable(true);
-        } else {
-           setDisable(false);
-        }
     }
   
     const style = {
