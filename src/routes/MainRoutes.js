@@ -9,6 +9,7 @@ import Transactions from '../component/Transactions'
 import TransactionDetail from '../component/TransactionDetail'
 import TransactionEdit from '../component/TransactionEdit'
 import Transfer from '../component/Transfer';
+import Tranfers from '../component/Transfers';
 import Invoices from '../component/Invoices';
 import InvoiceDetail from '../component/InvoiceDetail';
 import RequestMoney from '../component/RequestMoney';
@@ -64,6 +65,7 @@ const MainRoutes = ()=> {
             <Route path='user' element={<Accounts/>}/>
             <Route path='customer-new' element={<CreateCustomer/>}/>
             <Route path='transfer' element={<Transfer/>} />
+            <Route path='transfers' element={<Tranfers/>}/>
             <Route path='invoices/:invoiceId' element={<InvoiceDetail/>}/>
             <Route path='invoices' element={<Invoices/>}/>
             <Route path='accounts/:accountId' element={<AccountDetail/>}/>
