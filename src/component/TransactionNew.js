@@ -147,7 +147,7 @@ const TransactionNew = () => {
               <TextField
                 className={cssClasses.input}
                 id="outlined-basic"
-                label="Target Account"
+                label="Source Account"
                 variant="outlined"
                 style={{ margin: "7px 0 0 0" }}
                 value={sourceAccountNumber}
@@ -159,7 +159,7 @@ const TransactionNew = () => {
               <TextField
                 className={cssClasses.input}
                 id="outlined-basic"
-                label="Target Account"
+                label="Destination Account"
                 variant="outlined"
                 style={{ margin: "7px 0 0 0" }}
                 value={targetAccountNumber}
