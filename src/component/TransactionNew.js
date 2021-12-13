@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import cssClasses from "./signup/customer.module.css";
 import useInput from "./hooks/use-input";
-import {Button,TextField,Box,Typography} from '@mui/material';
-
+import {Button,TextField,Box,Typography, Grid} from '@mui/material';
+import {Link} from "react-router-dom";
 import {getToken , checkUnauthorisedAccess } from './_manageToken';
 
 const TransactionNew = () => {
@@ -99,79 +99,108 @@ const TransactionNew = () => {
 
 
     return (
-    <center>
-        <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
+      <>
+        <Grid container m={5} spacing={5}>
+          <Grid style={{alignItems:"right"}} item>
+            <Link to="/customer-new">
+              <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                Create New Account
+              </Button>
+            </Link>
+          </Grid>
+          <Grid style={{alignItems:"right"}} item>
+            <Link to="/accounts">
+              <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                All Accounts
+              </Button>
+            </Link>
+          </Grid>
+          <Grid style={{alignItems:"right"}} item>
+            <Link to="/transactions">
+              <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                All Transactions
+              </Button>
+            </Link>
+          </Grid>
+          <Grid style={{alignItems:"right"}} item>
+            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                Create New Transaction
+            </Button>
+          </Grid>
+        </Grid> 
+        <center>
+          <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
             <Typography
-                    variant="h3"
-                    noWrap
-                    component="div"
-                    m ={2}
-                    sx={{ flexGrow: 1 }}
+              variant="h3"
+              noWrap
+              component="div"
+              m ={2}
+              sx={{ flexGrow: 1 }}
             >
-                    Create transaction
+              Create transaction
             </Typography>
-        <form
-          onSubmit={submitFormHandler}
-          className={cssClasses.form}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            className={cssClasses.input}
-            id="outlined-basic"
-            label="Target Account"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={sourceAccountNumber}
-            onChange={sourceAccountNumberChangeHandler}
-            onBlur={sourceAccountNumberBlurHandler}
-            error={sourceAccountNumberError}
-            required
-          />
-          <TextField
-            className={cssClasses.input}
-            id="outlined-basic"
-            label="Target Account"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={targetAccountNumber}
-            onChange={targetAccountNumberChangeHandler}
-            onBlur={targetAccountNumberBlurHandler}
-            error={targetAccountNumberError}
-            required
-          />
-          <TextField
-            name="amount"
-            className={cssClasses.input}
-            label="Amount to Transfer"
-            type="number"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={amount}
-            onChange={amountChangeHandler}
-            onBlur={amountBlurHandler}
-            error={amountHasError}
-            required
-          />
-
-          <TextField
-            name="phoneNumber"
-            className={cssClasses.input}
-            label="Description"
-            type="text"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={description}
-            onChange={descriptionChangeHandler}
-            onBlur={descriptionBlurHandler}
-            error={descriptionHasError}
-          />
-        <Button variant="contained" style={{ margin: "7px 0 0 0" }}  component="button" sx={{flexGlow: 1}} onClick={submitFormHandler}>
-                        Create
-        </Button>   
-      </form>
-        </Box>
-    </center>
+            <form
+              onSubmit={submitFormHandler}
+              className={cssClasses.form}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                className={cssClasses.input}
+                id="outlined-basic"
+                label="Target Account"
+                variant="outlined"
+                style={{ margin: "7px 0 0 0" }}
+                value={sourceAccountNumber}
+                onChange={sourceAccountNumberChangeHandler}
+                onBlur={sourceAccountNumberBlurHandler}
+                error={sourceAccountNumberError}
+                required
+              />
+              <TextField
+                className={cssClasses.input}
+                id="outlined-basic"
+                label="Target Account"
+                variant="outlined"
+                style={{ margin: "7px 0 0 0" }}
+                value={targetAccountNumber}
+                onChange={targetAccountNumberChangeHandler}
+                onBlur={targetAccountNumberBlurHandler}
+                error={targetAccountNumberError}
+                required
+              />
+              <TextField
+                name="amount"
+                className={cssClasses.input}
+                label="Amount to Transfer"
+                type="number"
+                variant="outlined"
+                style={{ margin: "7px 0 0 0" }}
+                value={amount}
+                onChange={amountChangeHandler}
+                onBlur={amountBlurHandler}
+                error={amountHasError}
+                required
+              />
+              <TextField
+                name="phoneNumber"
+                className={cssClasses.input}
+                label="Description"
+                type="text"
+                variant="outlined"
+                style={{ margin: "7px 0 0 0" }}
+                value={description}
+                onChange={descriptionChangeHandler}
+                onBlur={descriptionBlurHandler}
+                error={descriptionHasError}
+              />
+              <Button variant="contained" style={{ margin: "7px 0 0 0" }}  component="button" sx={{flexGlow: 1}} onClick={submitFormHandler}>
+                Create
+              </Button>   
+            </form>
+          </Box>
+        </center>
+      </>
     );
 }
 

@@ -35,27 +35,30 @@ const Accounts = ()=> {
     <Grid container m={5} spacing={5}>
         <Grid style={{alignItems:"right"}} item>
             <Link to="/customer-new">
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                Create New Account
-            </Button>
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                    Create New Account
+                </Button>
             </Link>
         </Grid>
         <Grid style={{alignItems:"right"}} item>
-            <Link to="/invoices">
             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                    Invoices
+                All Accounts
             </Button>
-            </Link>
         </Grid>
         <Grid style={{alignItems:"right"}} item>
             <Link to="/transactions">
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                     All Transactions
-            </Button>
+                </Button>
             </Link>
         </Grid>
-
-        
+        <Grid style={{alignItems:"right"}} item>
+            <Link to={`/transactions/new`}>
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                    Create New Transaction
+                </Button>
+            </Link>
+        </Grid>
     </Grid>
     <hr/>
     <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >

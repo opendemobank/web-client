@@ -29,22 +29,39 @@ const TransactionAll = ()=> {
         })
     }, []);
 
-        return (
-            <>
-        <Grid container m={5} spacing={5}>
-            <Grid style={{alignItems:"right"}} item>
-                <Link to={`/transactions/new`}>
+    return (
+        <>
+            <Grid container m={5} spacing={5}>
+                <Grid style={{alignItems:"right"}} item>
+                    <Link to="/customer-new">
+                        <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                            Create New Account
+                        </Button>
+                    </Link>
+                </Grid>
+                <Grid style={{alignItems:"right"}} item>
+                    <Link to="/accounts">
+                        <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                            All Accounts
+                        </Button>
+                    </Link>
+                </Grid>
+                <Grid style={{alignItems:"right"}} item>
                     <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                        Create New Transaction
+                        All Transactions
                     </Button>
-                </Link>
+                </Grid>   
+                <Grid style={{alignItems:"right"}} item>
+                    <Link to={`/transactions/new`}>
+                        <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                            Create New Transaction
+                        </Button>
+                    </Link>
+                </Grid>
             </Grid>
-
-           
-        </Grid>
-        <hr/>
-        <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
-            <Typography
+            <hr/>
+            <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
+                <Typography
                     variant="h3"
                     noWrap
                     component="div"
@@ -52,33 +69,31 @@ const TransactionAll = ()=> {
                     sx={{ flexGrow: 1 }}
                     >
                     All Transactions
-            </Typography>
-            <Grid container style={{display:'flex',justifyContent:'center'}}>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {
-                    
-            transactions.map((value) => (
-                        <ListItem
-                        key={value.id}
-                        disableGutters
-                        secondaryAction={
-                            <Link to={`/accounts/transactions/${value.id}`}>
-                                <IconButton component="a"edge="end" aria-label="delete">
-                                <ArrowForwardIosIcon />
-                                </IconButton>
-
-                            </Link>
-                        }
-                        >
-                        <ListItemText primary={`Transaction  ${value.id}`} />
-                        </ListItem>
-                ))}
-                </List>
-            </Grid>
-
-        </Box>
+                </Typography>
+                <Grid container style={{display:'flex',justifyContent:'center'}}>
+                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {      
+                        transactions.map((value) => (
+                            <ListItem
+                                key={value.id}
+                                disableGutters
+                                secondaryAction={
+                                    <Link to={`/accounts/transactions/${value.id}`}>
+                                        <IconButton component="a"edge="end" aria-label="delete">
+                                            <ArrowForwardIosIcon />
+                                        </IconButton>
+                                    </Link>
+                                }
+                            >
+                                <ListItemText primary={`Transaction  ${value.id}`} />
+                            </ListItem>
+                        ))
+                    }
+                    </List>
+                </Grid>
+            </Box>
         </>
-        );
+    );
 }
 
 export default TransactionAll
