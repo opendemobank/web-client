@@ -19,7 +19,7 @@ import InvoiceDetail from '../component/InvoiceDetail';
 import RequestMoney from '../component/RequestMoney';
 
 
-import {AppBar, Container, Toolbar, Typography,Button} from '@mui/material'
+import {AppBar, Container, Toolbar, Typography, Button, Box} from '@mui/material'
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 
@@ -37,56 +37,55 @@ const MainRoutes = ()=> {
         return <Login/>
     }
     return (
-        <div>
+        <Box>
             <AppBar position="static">
-                <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-                    >
-                    <AccountBalanceRoundedIcon sx={{ fontSize : 64}} />
-                    </Typography>
-        
-                
-                    <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{ flexGrow: 1 }}
-                    >
-                    Open Demo Bank
-                    </Typography>
-                    <NavLink to="/requestMoney">
-                        <QrCodeIcon sx={{ fontSize: 64}} style={{ margin: "0 30px 0 0", color: "black"  }}/>
-                    </NavLink>
-                    <Button color="inherit" onClick={logout} >Logout</Button>
-                </Toolbar>
+                <Container>
+                    <Toolbar disableGutters>
+                        <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                        >
+                            <AccountBalanceRoundedIcon sx={{ fontSize : 64}} />
+                        </Typography>
+            
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ flexGrow: 1 }}
+                        >
+                            Open Demo Bank
+                        </Typography>
+                        <NavLink to="/request-money">
+                            <QrCodeIcon sx={{ fontSize: 64}} style={{ margin: "0 30px 0 0", color: "black"  }}/>
+                        </NavLink>
+                        <Button color="inherit" onClick={logout} >Logout</Button>
+                    </Toolbar>
                 </Container>
             </AppBar>
             <Routes path='/'>
-            <Route path="requestMoney" element={<RequestMoney/>}/>
-            <Route path='edit/:transactionId' element={<TransactionEdit/>}/>
-            <Route path='user' element={<CustomerAccounts/>}/>
-            <Route path='customer-new' element={<CreateCustomer/>}/>
-            <Route path='transfer' element={<Transfer/>} />
-            <Route path='transfers' element={<Tranfers/>}/>
-            <Route path='invoices/:invoiceId' element={<InvoiceDetail/>}/>
-            <Route path='invoices' element={<Invoices/>}/>
-            <Route path='transactions' element={<TransactionAll/>}/>
-            <Route path='transactions/new' element={<TransactionNew/>}/>
-            <Route path='user/accounts/:accountId' element={<AccountDetailCustomer/>}/>
-            <Route path='accounts/details/:accountId' element={<AccountDetailsAdmin/>}/>
-            <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
-            <Route path='accounts/transactions/:transactionId' element={<TransactionDetail/>}/>
-            <Route path='accounts/details/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
-            <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
-            <Route path='accounts/details/:accountId/transactions' element= {<Transactions/>}/>
-            <Route path='accounts' element= {<Accounts/>}/>
-            <Route path='*' element= {<Navigate to="/accounts"/>}/>
+                <Route path="request-money" element={<RequestMoney/>}/>
+                <Route path='edit/:transactionId' element={<TransactionEdit/>}/>
+                <Route path='user' element={<CustomerAccounts/>}/>
+                <Route path='customer-new' element={<CreateCustomer/>}/>
+                <Route path='transfer' element={<Transfer/>} />
+                <Route path='transfers' element={<Tranfers/>}/>
+                <Route path='invoices/:invoiceId' element={<InvoiceDetail/>}/>
+                <Route path='invoices' element={<Invoices/>}/>
+                <Route path='transactions' element={<TransactionAll/>}/>
+                <Route path='transactions/new' element={<TransactionNew/>}/>
+                <Route path='user/accounts/:accountId' element={<AccountDetailCustomer/>}/>
+                <Route path='accounts/details/:accountId' element={<AccountDetailsAdmin/>}/>
+                <Route path='accounts/:accountId/transactions/:transactionId/edit' element={<TransactionEdit/>}/>
+                <Route path='accounts/transactions/:transactionId' element={<TransactionDetail/>}/>
+                <Route path='accounts/details/:accountId/transactions/:transactionId' element={<TransactionDetail/>}/>
+                <Route path='accounts/:accountId/transactions' element= {<Transactions/>}/>
+                <Route path='accounts/details/:accountId/transactions' element= {<Transactions/>}/>
+                <Route path='accounts' element= {<Accounts/>}/>
+                <Route path='*' element= {<Navigate to="/accounts"/>}/>
             </Routes>
-        </div>
+        </Box>
     );
 }
 

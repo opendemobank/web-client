@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
@@ -11,6 +11,29 @@ import useInput from "../hooks/use-input";
 import moneyimg from "../assets/moneyplant.jpg";
 
 const Customer = () => {
+  const [ currencies, setCurrencies] = useState([]);
+
+  useEffect(() => {
+      axios.get(`http://50.17.212.123:8080/api/currencies`,{
+          headers :{
+              'Content-Type' : 'application/json',
+              'Authorization': getToken()
+          }
+
+      })
+      .then((data)=>{
+        //console.log(data);
+        setCurrencies(data.data);
+      })
+      .catch((error)=>{
+          setCurrencies([]);
+          checkUnauthorisedAccess(error);
+      })
+  }, []);
+
+  const currencyMenuItems = currencies.map(c =>
+    <MenuItem value={c} key={c.id}>{c.name}</MenuItem>
+  );
 
   const {
     value: name,
@@ -71,6 +94,14 @@ const Customer = () => {
   } = useInput((val) => val);
 
   const {
+    value: accountCurrency,
+    // hasError: accountCurrencyError,
+    // isValid: accountCurrencyIsValid,
+    valueChangedHandler: accountCurrencyChangedHandler,
+    inputBlurHandler: accountCurrencyBlurHandler,
+  } = useInput((val) => val);
+
+  const {
     value: userType,
     hasError: userTypeHasError,
     valueChangedHandler: userTypeChangeHandler,
@@ -87,6 +118,7 @@ const Customer = () => {
     passwordBlurHandler();
     phoneNumberBlurHandler();
     // accountNumberBlurHandler();
+    accountCurrencyBlurHandler();
     accountTypeBlurHandler();
     userTypeBlurHandler();
     
@@ -102,6 +134,7 @@ const Customer = () => {
           accountType : accountType,
           openDate : new Date(),
           balance : balance || 0,
+          currency : accountCurrency
         }      
         let customer = {
           email : email,
@@ -257,7 +290,21 @@ const Customer = () => {
               onChange={balanceChangeHandler}
               onBlur={balanceBlurHandler}
               required
-            />            
+            /> 
+            <TextField 
+                className={cssClasses.input}
+                id="outlined-basic"
+                label="Account currency"
+                variant="outlined"
+                style={{ margin: "20px 0 0 0" }}
+                value={accountCurrency}
+                select
+                onChange={accountCurrencyChangedHandler}
+                onBlur={accountCurrencyBlurHandler}
+                required
+              >
+                {currencyMenuItems}   
+            </TextField >        
             <InputLabel id="demo-simple-select-label">Account Type</InputLabel>
               <Select
                 style={{ margin: "7px 0 0 0" }}

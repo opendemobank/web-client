@@ -42,7 +42,7 @@ const Login = () => {
           if(data.data.user.role === "ADMIN"){
             window.location.assign('/accounts')
           }else{
-            window.location.assign('/invoices')
+            window.location.assign('/transfers')
           }
       })
       .catch(()=>{
