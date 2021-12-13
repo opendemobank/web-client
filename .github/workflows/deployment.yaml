@@ -17,7 +17,7 @@ jobs:
         username: ec2-user
         key: ${{ secrets.KEY }}
         script: |
-          sudo pkill node
+          sudo pkill node || true
           cd web-client
           git stash
           git pull
@@ -30,4 +30,4 @@ jobs:
         key: ${{ secrets.KEY }}
         script: |
           cd web-client
-          nohup npm start &
+          nohup npm start &> /dev/null &
