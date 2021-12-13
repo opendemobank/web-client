@@ -96,12 +96,12 @@ const TransactionDetail = () => {
                                             align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.description : ""}</TableCell>
                                     </TableRow>
                                     <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                        <TableCell align="">Account Name:</TableCell>
+                                        <TableCell align="">Receiver's Name:</TableCell>
                                         <TableCell
                                             align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.receiversFullName : ""}</TableCell>
                                     </TableRow>
                                     <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                        <TableCell align="">Account Number:</TableCell>
+                                        <TableCell align="">Receiver's Account Number:</TableCell>
                                         <TableCell
                                             align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.accountIBAN : ""}</TableCell>
                                     </TableRow>

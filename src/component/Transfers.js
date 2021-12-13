@@ -57,7 +57,19 @@ const Transfers = ()=> {
                 </TableBody>
             </Table>
         </TableContainer>
-    };
+    }
+    else {
+        table =
+            <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                m ={2}
+                sx={{ flexGrow: 1 }}
+            >
+                You do not have any transfers yet!
+            </Typography>
+    }
     
 
     return (
