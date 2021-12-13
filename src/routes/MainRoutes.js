@@ -58,7 +58,7 @@ const MainRoutes = ()=> {
                     >
                     Open Demo Bank
                     </Typography>
-                    <NavLink to="/requestMoney">
+                    <NavLink to="/request-money">
                         <QrCodeIcon sx={{ fontSize: 64}} style={{ margin: "0 30px 0 0", color: "black"  }}/>
                     </NavLink>
                     <Button color="inherit" onClick={logout} >Logout</Button>
@@ -66,7 +66,7 @@ const MainRoutes = ()=> {
                 </Container>
             </AppBar>
             <Routes path='/'>
-            <Route path="requestMoney" element={<RequestMoney/>}/>
+            <Route path="request-money" element={<RequestMoney/>}/>
             <Route path='edit/:transactionId' element={<TransactionEdit/>}/>
             <Route path='user' element={<CustomerAccounts/>}/>
             <Route path='customer-new' element={<CreateCustomer/>}/>

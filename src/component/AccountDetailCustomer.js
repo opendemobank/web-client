@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams, NavLink } from 'react-router-dom';
-import useInput from "./hooks/use-input";
+import { useParams, Link } from 'react-router-dom';
 import {getToken , checkUnauthorisedAccess } from "./_manageToken";
 import '../App.css';
 
 
-import {TableRow,Paper,Button,TextField,Grid,TableContainer,TableCell,TableBody,Table,Box,Typography} from '@mui/material';
+import {TableRow,Paper,Button,Grid,TableContainer,TableCell,TableBody,Table,Typography} from '@mui/material';
 
 
 const AccountDetailCustomer = () => {
@@ -36,46 +35,66 @@ const AccountDetailCustomer = () => {
 
     return (
         <>
-            <Box component="div" m={5} sx={{alignContent:'center'}} >
             <center>
+                <Grid container m={5} spacing={5}>
+                    <Grid style={{alignItems:"right"}} item>
+                        <Link to="/user">
+                            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                                Accounts
+                            </Button>
+                        </Link>
+                    </Grid>
+                    <Grid style={{alignItems:"right"}} item>
+                        <Link to="/request-money">
+                            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                                Request A Transfer
+                            </Button>
+                        </Link>
+                    </Grid>
+                    <Grid style={{alignItems:"right"}} item>
+                        <Link to="/transfer">
+                            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                                Make A New Transfer
+                            </Button>
+                        </Link>
+                    </Grid>
+                    <Grid style={{alignItems:"right"}} item>
+                        <Link to="/transfers">
+                            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                                Transfers
+                            </Button>
+                        </Link>
+                    </Grid>
+                </Grid>
+                <hr/>
                 <Typography
-                        variant="h3"
-                        noWrap
-                        component="div"
-                        m ={2}
-                        sx={{ flexGrow: 1 }}
-                        >
-                        Details
+                    variant="h3"
+                    noWrap
+                    component="div"
+                    m ={2}
+                    sx={{ flexGrow: 1 }}
+                    >
+                    Account Details
                 </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ maxWidth: 650 }} aria-label="simple table">
                         <TableBody>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account number:</TableCell>
+                                <TableCell align=""><b>Account number:</b></TableCell>
                                 <TableCell align="right">{accountDetail.iban}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Account balance:</TableCell>
+                                <TableCell align=""><b>Account balance:</b></TableCell>
                                 <TableCell align="right">{accountDetail.balance}</TableCell>
                             </TableRow>
                             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="">Currency:</TableCell>
+                                <TableCell align=""><b>Currency:</b></TableCell>
                                 <TableCell align="right">{accountDetail?.currency?.name}</TableCell>
                             </TableRow>         
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Grid container m={5}>
-                <Grid my={1} item xs={6} md={2}>
-                    <NavLink to={`/transfers`}>
-                    <Button variant="contained"  component="button" sx={{flexGlow: 1}}>
-                    Transfers
-                    </Button>   
-                    </NavLink>
-                </Grid>
-                </Grid>
-                </center>
-            </Box>
+            </center>
         </>
     );
 }

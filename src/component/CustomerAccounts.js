@@ -35,45 +35,48 @@ const CustomerAccounts = ()=> {
     <Grid container m={5} spacing={5}>
         <Grid style={{alignItems:"right"}} item>
             <Link to="/customer-new">
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                Create New Account
-            </Button>
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                    Create New Account
+                </Button>
             </Link>
         </Grid>
         <Grid style={{alignItems:"right"}} item>
             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                    Account
+                Accounts
             </Button>
         </Grid>
-
+        <Grid style={{alignItems:"right"}} item>
+            <Link to="/request-money">
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                    Request A Transfer
+                </Button>
+            </Link>
+        </Grid>
         <Grid style={{alignItems:"right"}} item>
             <Link to="/transfer">
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
                     Make A New Transfer
-            </Button>
+                </Button>
             </Link>
         </Grid>
-
         <Grid style={{alignItems:"right"}} item>
-            <Link to="/invoices">
-            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                    Invoices
-            </Button>
+            <Link to="/transfers">
+                <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                    Transfers
+                </Button>
             </Link>
         </Grid>
-
-        
     </Grid>
     <hr/>
     <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
         <Typography
-                variant="h3"
-                noWrap
-                component="div"
-                m ={2}
-                sx={{ flexGrow: 1 }}
-                >
-                Accounts
+            variant="h3"
+            noWrap
+            component="div"
+            m ={2}
+            sx={{ flexGrow: 1 }}
+        >
+            Accounts
         </Typography>
         <Grid container style={{display:'flex',justifyContent:'center'}}>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

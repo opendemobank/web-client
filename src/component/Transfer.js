@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import cssClasses from "./signup/customer.module.css";
 import useInput from "./hooks/use-input";
-import {Button,TextField,Box,Typography, MenuItem, RadioGroup, FormControlLabel, Radio, FormLabel} from '@mui/material';
+import {Link} from "react-router-dom";
+import {Grid, Button,TextField,Box,Typography, MenuItem, RadioGroup, FormControlLabel, Radio, FormLabel} from '@mui/material';
 
 import {getToken , checkUnauthorisedAccess } from './_manageToken';
 
@@ -131,7 +132,7 @@ const Transfer = () => {
       })
       .then((data)=>{
           alert("Money has been transferred")
-          window.location.assign('/invoices');
+          window.location.assign('/transfers');
       })
       .catch((error)=>{
           alert("Oops! Something went wrong")
@@ -221,86 +222,116 @@ const Transfer = () => {
       required
     />;
     return (
-    <center>
-        <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
+      <>
+        <Grid container m={5} spacing={5}>
+          <Grid style={{alignItems:"right"}} item>
+            <Link to="/user">
+              <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                Accounts
+              </Button>
+            </Link>
+          </Grid>
+          <Grid style={{alignItems:"right"}} item>
+            <Link to="/request-money">
+              <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                Request A Transfer
+              </Button>
+            </Link>
+          </Grid>
+          <Grid style={{alignItems:"right"}} item>
+            <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+              Make A New Transfer
+            </Button>
+          </Grid>
+          <Grid style={{alignItems:"right"}} item>
+            <Link to="/transfers">
+              <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
+                Transfers
+              </Button>
+            </Link>
+          </Grid>
+        </Grid>
+        <hr/>
+        <center>
+          <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
             <Typography
-                    variant="h3"
-                    noWrap
-                    component="div"
-                    m ={2}
-                    sx={{ flexGrow: 1 }}
+              variant="h3"
+              noWrap
+              component="div"
+              m ={2}
+              sx={{ flexGrow: 1 }}
             >
-                    Transfer
+              Make a transfer
             </Typography>
-        <form
-          onSubmit={submitFormHandler}
-          className={cssClasses.form}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField 
-            className={cssClasses.input}
-            id="outlined-basic"
-            label="Sender Account"
-            variant="outlined"
-            style={{ margin: "20px 0 0 0" }}
-            value={sendersAccountNumber}
-            select
-            onChange={sendersAccountNumberChangedHandler}
-            onBlur={sendersAccountNumberBlurHandler}
-            error={sendersAccountNumberError}
-            helperText={sendersAccountNumberErrorMsg}
-            required
-          >
-            {senderAccountMenuItems}
-          </TextField >
-          <FormLabel component="legend">Recipient Information</FormLabel>
-          <RadioGroup
-              aria-label="gender"
-              defaultValue="iban"
-              name="radio-buttons-group"
-          >
-            <FormControlLabel value="iban" control={<Radio onChange={(e) => radioHandler(1)}/>} label="IBAN" />
-            <FormControlLabel value="email" control={<Radio onChange={(e) => radioHandler(2)}/>} label="Email" />
-            <FormControlLabel value="phone" control={<Radio onChange={(e) => radioHandler(3)}/>} label="Phone" />
-          </RadioGroup>
-          {receiverStatus === 1 && receiverAccountNumberTextField}
-          {receiverStatus === 2 && receiverEmailTextField}
-          {receiverStatus === 3 && receiverPhoneTextField}
-          <TextField
-            name="amount"
-            className={cssClasses.input}
-            label="Amount to Transfer"
-            type="number"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={amount}
-            onChange={amountChangeHandler}
-            onBlur={amountBlurHandler}
-            error={amountHasError}
-            helperText={amountErrorMsg}
-            required
-          />
-
-          <TextField
-            name="phoneNumber"
-            className={cssClasses.input}
-            label="Description"
-            type="text"
-            variant="outlined"
-            style={{ margin: "7px 0 0 0" }}
-            value={description}
-            onChange={descriptionChangeHandler}
-            onBlur={descriptionBlurHandler}
-            error={descriptionHasError}
-            helperText={descriptionErrorMsg}
-          />
-          <Button variant="contained" type="submit" active="true" style={{ margin: "7px 0 0 0" }}  component="button" sx={{flexGlow: 1}}>
-            Transfer
-          </Button>
-      </form>
-        </Box>
-    </center>
+            <form
+              onSubmit={submitFormHandler}
+              className={cssClasses.form}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField 
+                className={cssClasses.input}
+                id="outlined-basic"
+                label="Sender Account"
+                variant="outlined"
+                style={{ margin: "20px 0 0 0" }}
+                value={sendersAccountNumber}
+                select
+                onChange={sendersAccountNumberChangedHandler}
+                onBlur={sendersAccountNumberBlurHandler}
+                error={sendersAccountNumberError}
+                helperText={sendersAccountNumberErrorMsg}
+                required
+              >
+              {senderAccountMenuItems}
+              </TextField >
+              <FormLabel component="legend">Recipient Information</FormLabel>
+              <RadioGroup
+                aria-label="gender"
+                defaultValue="iban"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel value="iban" control={<Radio onChange={(e) => radioHandler(1)}/>} label="IBAN" />
+                <FormControlLabel value="email" control={<Radio onChange={(e) => radioHandler(2)}/>} label="Email" />
+                <FormControlLabel value="phone" control={<Radio onChange={(e) => radioHandler(3)}/>} label="Phone" />
+              </RadioGroup>
+              {receiverStatus === 1 && receiverAccountNumberTextField}
+              {receiverStatus === 2 && receiverEmailTextField}
+              {receiverStatus === 3 && receiverPhoneTextField}
+              <TextField
+                name="amount"
+                className={cssClasses.input}
+                label="Amount to Transfer"
+                type="number"
+                variant="outlined"
+                style={{ margin: "7px 0 0 0" }}
+                value={amount}
+                onChange={amountChangeHandler}
+                onBlur={amountBlurHandler}
+                error={amountHasError}
+                helperText={amountErrorMsg}
+                required
+              />
+              <TextField
+                name="phoneNumber"
+                className={cssClasses.input}
+                label="Description"
+                type="text"
+                variant="outlined"
+                style={{ margin: "7px 0 0 0" }}
+                value={description}
+                onChange={descriptionChangeHandler}
+                onBlur={descriptionBlurHandler}
+                error={descriptionHasError}
+                helperText={descriptionErrorMsg}
+              />
+              <Button variant="contained" type="submit" active="true" style={{ margin: "7px 0 0 0" }}  component="button" sx={{flexGlow: 1}}>
+                Transfer
+              </Button>
+            </form>
+          </Box>
+        </center>
+      </>
     );
 }
 
