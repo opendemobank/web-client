@@ -17,25 +17,17 @@ jobs:
         username: ec2-user
         key: ${{ secrets.KEY }}
         script: |
+          sudo pkill node || true
           cd web-client
+          git stash
           git pull
 
-    - name: Deploy
+    - name: Start
       uses: appleboy/ssh-action@master
       with:
         host: "50.17.212.123"
         username: ec2-user
         key: ${{ secrets.KEY }}
         script: |
-          docker-compose up -d --build frontend
-
-    - name: Cleanup
-      uses: appleboy/ssh-action@master
-      with:
-        host: "50.17.212.123"
-        username: ec2-user
-        key: ${{ secrets.KEY }}
-        script: |
-          docker image prune -a -f
-          docker system prune -f --volumes
-
+          cd web-client
+          nohup npm start &> /dev/null &
