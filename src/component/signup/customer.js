@@ -337,7 +337,7 @@ const Customer = () => {
                 <MenuItem value={'USER'}>Customer</MenuItem>
               </Select>
 
-            <button className={cssClasses.signinbtn}>Create</button>
+            <button type="submit" className={cssClasses.signinbtn}>Create</button>
           </form>
         </div>
       </div>
