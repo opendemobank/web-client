@@ -151,7 +151,7 @@ const TransactionDetail = () => {
                         <Grid container spacing={1} style={{ margin: "7px 0 0 0" }}>
                             <Grid item xs={6}>
                                 <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={callBackTransaction}>
-                                    Call Back Transaction
+                                    Storno Transaction
                                 </Button>
                             </Grid>
                             <Grid item xs={6}>
