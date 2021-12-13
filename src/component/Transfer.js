@@ -83,7 +83,7 @@ const Transfer = () => {
     valueChangedHandler: amountChangeHandler,
     inputBlurHandler: amountBlurHandler,
     setInput: setAmount
-  } = useInput((val) => val.length > 6);
+  } = useInput((val) => val.length > 0);
 
   const {
     value: description,

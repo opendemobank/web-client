@@ -35,7 +35,6 @@ const Login = () => {
     if (emailIsValid && passwordIsValid) {
       axios.post(`http://50.17.212.123:8080/api/users/login?email=${enteredEmail}&password=${enteredPassword}`)
       .then((data)=>{
-          // console.log(data.data.user)
           serLoginStatus("")
           localStorage.setItem('accessToken', data.data.token)
           localStorage.setItem('user', JSON.stringify(data.data.user));

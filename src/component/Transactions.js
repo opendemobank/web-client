@@ -20,7 +20,7 @@ const Transactions = ()=> {
 
         })
         .then((data)=>{
-          //console.log(data);
+          console.log(data);
           setTransactions(data.data);
         })
         .catch((error)=>{

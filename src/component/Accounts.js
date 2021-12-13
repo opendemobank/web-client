@@ -19,7 +19,7 @@ const Accounts = ()=> {
 
         })
         .then((data)=>{
-            // console.log(data);
+            console.log(data);
             setAccounts(data.data)
         })
         .catch((error)=>{

@@ -106,7 +106,7 @@ const TransactionDetail = () => {
                                             align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.accountIBAN : ""}</TableCell>
                                     </TableRow>
                                     <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                        <TableCell align="">Amount Withdrawal:</TableCell>
+                                        <TableCell align="">Amount:</TableCell>
                                         <TableCell
                                             align="right">{TransactionDetail.transfer != null ? TransactionDetail.transfer.amount : ""}</TableCell>
                                     </TableRow>

@@ -139,6 +139,7 @@ const Customer = () => {
         let customer = {
           email : email,
           password : password,
+          transactions: [],
           fullName : name,
           phoneNumber : phoneNumber,
           role : userType,
@@ -154,7 +155,8 @@ const Customer = () => {
           }        
       })
       .then((data)=>{
-          window.location.assign('/accounts');
+        alert("Success!");
+        window.location.assign('/accounts');
       })
       .catch((error)=>{
           checkUnauthorisedAccess(error);
