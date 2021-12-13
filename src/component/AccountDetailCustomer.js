@@ -36,7 +36,7 @@ const AccountDetailCustomer = () => {
     return (
         <>
             <center>
-                <Grid container m={5} spacing={5}>
+                <Grid container m={3} spacing={1}>
                     <Grid style={{alignItems:"right"}} item>
                         <Link to="/user">
                             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
@@ -68,7 +68,7 @@ const AccountDetailCustomer = () => {
                 </Grid>
                 <hr/>
                 <Typography
-                    variant="h3"
+                    variant="h4"
                     noWrap
                     component="div"
                     m ={2}

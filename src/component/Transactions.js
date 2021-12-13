@@ -31,7 +31,7 @@ const Transactions = ()=> {
 
     return (
         <>
-            <Grid container m={5} spacing={5}>
+            <Grid container m={3} spacing={1}>
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/customer-new">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
@@ -42,14 +42,14 @@ const Transactions = ()=> {
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/accounts">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            All Accounts
+                            Accounts
                         </Button>
                     </Link>
                 </Grid>
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/transactions">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            All Transactions
+                            Transactions
                         </Button>
                     </Link>
                 </Grid>
@@ -62,9 +62,9 @@ const Transactions = ()=> {
                 </Grid>
             </Grid>
             <hr/>
-            <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
+            <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
                 <Typography
-                    variant="h3"
+                    variant="h4"
                     noWrap
                     component="div"
                     m ={2}

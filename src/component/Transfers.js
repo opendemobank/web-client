@@ -30,42 +30,40 @@ const Transfers = ()=> {
     let table = "";
     if (transfers !== null && transfers.length > 0) {
         table = 
-        <Box component="div" m={5} sx={{ border: '1px solid  grey', alignContent:'center' }} >
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableCell><b>Id</b></TableCell>
-                        <TableCell align="right"><b>Description</b></TableCell>
-                        <TableCell align="right"><b>Receiver's full name</b></TableCell>
-                        <TableCell align="right"><b>Receiver's account number</b></TableCell>
-                        <TableCell align="right"><b>Amount</b></TableCell>
-                    </TableHead>
-                    <TableBody>
-                    {transfers.map((transfer) => (
-                        <TableRow
-                            key={transfer.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {transfer.id}
-                            </TableCell>
-                            <TableCell align="right">{transfer.description}</TableCell>
-                            <TableCell align="right">{transfer.receiversFullName}</TableCell>
-                            <TableCell align="right">{transfer.accountIBAN}</TableCell>
-                            <TableCell align="right">{transfer.amount}</TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Box>
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                    <TableCell><b>Id</b></TableCell>
+                    <TableCell align="right"><b>Description</b></TableCell>
+                    <TableCell align="right"><b>Receiver's full name</b></TableCell>
+                    <TableCell align="right"><b>Receiver's account number</b></TableCell>
+                    <TableCell align="right"><b>Amount</b></TableCell>
+                </TableHead>
+                <TableBody>
+                {transfers.map((transfer) => (
+                    <TableRow
+                        key={transfer.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                        <TableCell component="th" scope="row">
+                            {transfer.id}
+                        </TableCell>
+                        <TableCell align="right">{transfer.description}</TableCell>
+                        <TableCell align="right">{transfer.receiversFullName}</TableCell>
+                        <TableCell align="right">{transfer.accountIBAN}</TableCell>
+                        <TableCell align="right">{transfer.amount}</TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     };
     
 
     return (
         <>
             <center>
-                <Grid container m={5} spacing={5}>
+                <Grid container m={4} spacing={1}>
                     <Grid style={{alignItems:"right"}} item>
                         <Link to="/user">
                             <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
@@ -94,18 +92,16 @@ const Transfers = ()=> {
                     </Grid>
                 </Grid>
                 <hr/>
-                <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
-                    <Typography
-                        variant="h3"
-                        noWrap
-                        component="div"
-                        m ={2}
-                        sx={{ flexGrow: 1 }}
-                    >
-                        Transfers
-                    </Typography>
-                    {table}
-                </Box>
+                <Typography
+                    variant="h4"
+                    noWrap
+                    component="div"
+                    m ={2}
+                    sx={{ flexGrow: 1 }}
+                >
+                    Transfers
+                </Typography>
+                {table}
             </center>
         </>
     );

@@ -136,7 +136,7 @@ const AccountDetailsAdmin = () => {
 
     return (
         <>
-            <Grid container m={5} spacing={5}>
+            <Grid container m={3} spacing={1}>
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/customer-new">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
@@ -147,14 +147,14 @@ const AccountDetailsAdmin = () => {
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/accounts">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            All Accounts
+                            Accounts
                         </Button>
                     </Link>
                 </Grid>
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/transactions">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            All Transactions
+                            Transactions
                         </Button>
                     </Link>
                 </Grid>
@@ -169,7 +169,7 @@ const AccountDetailsAdmin = () => {
             <Box component="div" m={5} sx={{height:"400px", alignContent:'center' }} >
                 <center>
                     <Typography
-                            variant="h3"
+                            variant="h4"
                             noWrap
                             component="div"
                             m ={2}
@@ -208,7 +208,7 @@ const AccountDetailsAdmin = () => {
                         </Table>
                     </TableContainer>
                 </center>
-                <Grid container m={5}>
+                <Grid container m={1} spacing={1}>
                     <Grid my={1} item xs={6} md={2}>
                         <div>
                             <Button id="close-acc" variant="contained" component="button" sx={{flexGlow: 1}} onClick={handleOpen}>
@@ -263,7 +263,7 @@ const AccountDetailsAdmin = () => {
                             onChange={addBalanceChangeHandler}
                         />
                     </Grid>
-                    <Grid my={1} item xs={6} md={2}>
+                    <Grid my={2} item xs={6} md={2}>
                         <Button variant="contained" onClick={addMoneyToAccount}  component="button" sx={{flexGlow: 1}}>
                             Add Money
                         </Button>   
@@ -278,7 +278,7 @@ const AccountDetailsAdmin = () => {
                             onChange={withdrawBalanceChangeHandler}
                         />
                     </Grid>
-                    <Grid my={1} item xs={6} md={2}>
+                    <Grid my={2} item xs={6} md={2}>
                         <Button variant="contained" onClick={withDrawMoneyFromAccount}  component="button" sx={{flexGlow: 1}}>
                             Withdraw
                         </Button>   

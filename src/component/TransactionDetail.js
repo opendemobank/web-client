@@ -45,7 +45,7 @@ const TransactionDetail = () => {
 
     return (
         <>
-            <Grid container m={5} spacing={5}>
+            <Grid container m={3} spacing={1}>
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/customer-new">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
@@ -56,14 +56,14 @@ const TransactionDetail = () => {
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/accounts">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            All Accounts
+                            Accounts
                         </Button>
                     </Link>
                 </Grid>
                 <Grid style={{alignItems:"right"}} item>
                     <Link to="/transactions">
                         <Button noWrap component="div" sx={{flexGlow: 1}}  variant="outlined">
-                            All Transactions
+                            Transactions
                         </Button>
                     </Link>
                 </Grid>
@@ -76,9 +76,9 @@ const TransactionDetail = () => {
                 </Grid>
             </Grid> 
             <center>
-                <Box component="div" m={5} sx={{ border: '1px solid  grey',height:"400px",alignContent:'center' }} >
+                <Box component="div" m={5} sx={{height:"400px",alignContent:'center' }} >
                     <Typography
-                        variant="h3"
+                        variant="h4"
                         noWrap
                         component="div"
                         m ={2}
@@ -108,13 +108,13 @@ const TransactionDetail = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    <Grid container m={5}>
-                        <Grid item xs={2}>
+                    <Grid container spacing={1} style={{ margin: "7px 0 0 0" }}>
+                        <Grid item xs={6}>
                             <Button variant="contained" component="button" sx={{flexGlow: 1}} onClick={callBackTransaction}>
                                 Call Back Transaction
                             </Button>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={6}>
                             <NavLink to={`/edit/${transactionId}`}>
                                 <Button variant="contained" component="button" sx={{flexGlow: 1}}>
                                     Modify Transaction
