@@ -283,7 +283,7 @@ const Transfer = () => {
                 helperText={sendersAccountNumberErrorMsg}
                 required
               >
-              {senderAccountMenuItems}
+                {senderAccountMenuItems}
               </TextField >
               <FormLabel component="legend">Recipient Information</FormLabel>
               <RadioGroup
